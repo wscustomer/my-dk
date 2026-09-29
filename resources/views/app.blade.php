@@ -14,7 +14,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         <x-inertia::head>
-            <title>{{ config('app.name', 'CRM Digital Konsultan') }}</title>
+            <title>{{ config('app.name', 'Digital Konsultan') }}</title>
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">

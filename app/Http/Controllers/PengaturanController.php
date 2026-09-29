@@ -16,14 +16,16 @@ class PengaturanController extends Controller
     public function index(): Response
     {
         return Inertia::render('Pengaturan/Index', [
-            'nilai' => Pengaturan::query()->orderBy('grup')->orderBy('kunci')->get()->map(fn (Pengaturan $p) => [
-                'kunci' => $p->kunci,
-                'nilai' => $p->nilai,
-                'nilai_teks' => $p->nilai_format,
-                'keterangan' => $p->keterangan,
-                'grup' => $p->grup,
-                'tipe' => $p->tipe,
-            ]),
+            'nilai' => Pengaturan::query()->orderBy('kunci')->get()
+                ->sortBy([fn (Pengaturan $p) => $p->grup, fn (Pengaturan $p) => $p->kunci])
+                ->values()->map(fn (Pengaturan $p) => [
+                    'kunci' => $p->kunci,
+                    'nilai' => $p->nilai,
+                    'nilai_teks' => $p->nilai_format,
+                    'keterangan' => $p->keterangan,
+                    'grup' => $p->grup,
+                    'tipe' => $p->tipe,
+                ]),
             'persen_dp' => (float) Pengaturan::nilai('dp_persen_default', 50),
             'persen_dp_teks' => Pengaturan::nilai('dp_persen_default', 50).'%',
             'contoh_harga' => Uang::format(12500000),

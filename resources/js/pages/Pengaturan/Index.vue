@@ -19,7 +19,7 @@ const form = useForm({
     nama_perusahaan: awal.nama_perusahaan ?? '',
     email_perusahaan: awal.email_perusahaan ?? '',
     telepon_perusahaan: awal.telepon_perusahaan ?? '',
-    warna_utama: awal.warna_utama ?? '#2563eb',
+    warna_utama: awal.warna_utama ?? '#2196f3',
     dp_persen_default: awal.dp_persen_default ?? 50,
     peran_boleh_lihat_nilai: awal.peran_boleh_lihat_nilai ?? 'admin',
 });

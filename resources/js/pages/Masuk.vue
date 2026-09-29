@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, usePage } from '@inertiajs/vue3';
 
+const page = usePage<any>();
 const form = useForm({ email: '', password: '', ingat: false });
 
 function kirim() {
@@ -18,7 +19,7 @@ function kirim() {
                     >DK</span
                 >
                 <h1 class="text-lg font-semibold text-gray-900">
-                    CRM Digital Konsultan
+                    {{ page.props.merek || 'Digital Konsultan' }}
                 </h1>
                 <p class="dk-sub mt-0.5">
                     Masuk untuk mengelola klien & proyek

@@ -76,7 +76,7 @@ function simpan() {
                             <Badge
                                 :teks="u.label_peran"
                                 :warna="
-                                    u.peran === 'admin' ? '#2563eb' : '#6b7280'
+                                    u.peran === 'admin' ? '#2196f3' : '#6b7280'
                                 "
                             />
                         </td>

@@ -18,7 +18,7 @@ class ProyekTahapan extends Model
 
     public const STATUS = [
         'belum' => ['Belum', '#9ca3af'],
-        'jalan' => ['Jalan', '#2563eb'],
+        'jalan' => ['Jalan', '#2196f3'],
         'selesai' => ['Selesai', '#16a34a'],
         'dilewati' => ['Dilewati', '#a1a1aa'],
     ];

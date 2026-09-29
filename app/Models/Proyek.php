@@ -119,7 +119,7 @@ class Proyek extends Model
             'batal', 'ditahan' => '#dc2626',
             'revisi', 'kualitas' => '#d97706',
             'bangun', 'desain' => '#0891b2',
-            'deal' => '#2563eb',
+            'deal' => '#2196f3',
             default => '#6b7280',
         };
     }

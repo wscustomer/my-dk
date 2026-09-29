@@ -5,6 +5,7 @@ import { rute } from '@/lib/rute';
 
 const page = usePage<any>();
 const pengguna = computed(() => page.props.auth?.user);
+const merek = computed(() => page.props.merek || 'Digital Konsultan');
 const menu = computed(() =>
     (page.props.menu || []).filter(
         (m: any) => !m.admin || page.props.auth?.admin,
@@ -57,9 +58,9 @@ const inisial = computed(() => {
                         class="flex h-7 w-7 items-center justify-center rounded-md bg-blue-600 text-xs font-bold text-white"
                         >DK</span
                     >
-                    <span class="text-sm font-semibold text-gray-900"
-                        >Digital Konsultan</span
-                    >
+                    <span class="text-sm font-semibold text-gray-900">{{
+                        merek
+                    }}</span>
                 </Link>
 
                 <nav class="flex flex-1 flex-col gap-0.5">
@@ -126,7 +127,7 @@ const inisial = computed(() => {
                     >
                         ☰
                     </button>
-                    <span class="text-sm font-semibold">Digital Konsultan</span>
+                    <span class="text-sm font-semibold">{{ merek }}</span>
                     <button
                         type="button"
                         class="dk-tbl dk-tbl-halus"

@@ -32,7 +32,7 @@ class PortalController extends Controller
 
         return Inertia::render('Portal', [
             'perusahaan' => Pengaturan::nilai('nama_perusahaan', 'Digital Konsultan'),
-            'warna' => Pengaturan::nilai('warna_utama', '#2563eb'),
+            'warna' => Pengaturan::nilai('warna_utama', '#2196f3'),
             'proyek' => [
                 'nama' => $proyek->nama,
                 'jenis' => $proyek->label_jenis,

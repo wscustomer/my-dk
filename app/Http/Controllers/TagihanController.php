@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Klien;
+use App\Models\Pengaturan;
 use App\Models\Proyek;
 use App\Models\Tagihan;
 use App\Models\TagihanBayar;
@@ -56,6 +57,7 @@ class TagihanController extends Controller
                 'klien' => Klien::query()->orderBy('nama')->get(['id', 'nama']),
                 'proyek' => Proyek::query()->orderBy('nama')->get(['id', 'nama', 'klien_id']),
             ],
+            'rekening' => Pengaturan::nilai('rekening_bank'),
         ]);
     }
 

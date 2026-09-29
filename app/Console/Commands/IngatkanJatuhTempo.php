@@ -53,7 +53,7 @@ class IngatkanJatuhTempo extends Command
             $baris[] = "PROYEK — {$p->nama} | {$p->klien?->nama} | target {$p->tgl_target?->format('d/m/Y')} | {$p->persen}% ({$p->tahap_sekarang})";
         }
 
-        $teks = "Ringkasan pengingat CRM Digital Konsultan\n".now()->format('d/m/Y H:i')."\n\n".implode("\n", $baris);
+        $teks = 'Ringkasan pengingat '.Pengaturan::nilai('nama_perusahaan', 'Digital Konsultan')."\n".now()->format('d/m/Y H:i')."\n\n".implode("\n", $baris);
         $this->line($teks);
 
         if ($kering) {

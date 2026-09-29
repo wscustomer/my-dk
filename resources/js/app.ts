@@ -1,6 +1,6 @@
 import { createInertiaApp } from '@inertiajs/vue3';
 
-const appName = import.meta.env.VITE_APP_NAME || 'CRM Digital Konsultan';
+const appName = import.meta.env.VITE_APP_NAME || 'Digital Konsultan';
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -14,6 +14,6 @@ void createInertiaApp({
         });
     },
     progress: {
-        color: '#2563eb',
+        color: '#2196f3',
     },
 });

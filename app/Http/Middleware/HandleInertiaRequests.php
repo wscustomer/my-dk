@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Pengaturan;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,6 +41,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'merek' => Pengaturan::nilai('nama_perusahaan', 'Digital Konsultan'),
             'auth' => [
                 'user' => $user ? [
                     'id' => $user->id,

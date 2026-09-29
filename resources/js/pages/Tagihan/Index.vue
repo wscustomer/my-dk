@@ -15,6 +15,7 @@ const props = defineProps<{
     ringkas: any;
     filter: any;
     opsi: any;
+    rekening: string | null;
 }>();
 
 const q = ref(props.filter.q || '');
@@ -285,6 +286,19 @@ const ada = computed(() => props.daftar.data.length > 0);
                             {{ bayarUntuk.sisa_teks }}
                         </p>
                     </div>
+                </div>
+
+                <div v-if="rekening" class="rounded-lg bg-gray-50 p-3">
+                    <p class="dk-label">Rekening pembayaran</p>
+                    <ul class="mt-1 space-y-0.5">
+                        <li
+                            v-for="(r, i) in rekening.split('|')"
+                            :key="i"
+                            class="text-gray-800"
+                        >
+                            {{ r.trim() }}
+                        </li>
+                    </ul>
                 </div>
 
                 <div v-if="bayarUntuk.pembayaran.length">

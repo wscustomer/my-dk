@@ -23,7 +23,7 @@ class Pengaturan extends Model
         'email_perusahaan' => ['', 'Email perusahaan', 'umum'],
         'telepon_perusahaan' => ['', 'Telepon/WA perusahaan', 'umum'],
         'alamat_perusahaan' => ['Klaten, Jawa Tengah', 'Alamat perusahaan', 'umum'],
-        'warna_utama' => ['#2563eb', 'Warna aksen tampilan & portal', 'umum'],
+        'warna_utama' => ['#2196f3', 'Warna aksen tampilan & portal', 'umum'],
         'rekening_bank' => ['', 'Bank — nomor rekening — atas nama', 'penagihan'],
         'email_pengingat' => ['', 'Tujuan email pengingat jatuh tempo', 'penagihan'],
         'hari_ingat_tagihan' => ['7', 'Hari sebelum jatuh tempo mulai diingatkan', 'penagihan'],

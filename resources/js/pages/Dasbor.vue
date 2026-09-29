@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
                 :nilai="hidup.kartu.klien_aktif"
                 :sub="`+${hidup.kartu.klien_baru_bulan} bulan ini`"
                 ikon="★"
-                warna="#2563eb"
+                warna="#2196f3"
             />
             <Kartu
                 judul="Proyek jalan"
