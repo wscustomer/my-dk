@@ -8,4 +8,7 @@ return [
     // Sumber penagihan WSCRM — baca-saja, dipakai dk:tarik-wscrm.
     'wscrm_url' => env('WSCRM_URL'),
     'wscrm_token' => env('WSCRM_TOKEN'),
+
+    // Ikutkan DataRamaiSeeder saat `db:seed` (data contoh volume, bukan produksi).
+    'seed_contoh' => (bool) env('DK_SEED_CONTOH', false),
 ];

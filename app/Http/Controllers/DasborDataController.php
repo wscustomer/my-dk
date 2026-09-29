@@ -105,7 +105,7 @@ class DasborDataController extends Controller
             'waktu' => now()->timezone(Pengaturan::nilai('zona_waktu', 'Asia/Jakarta'))->format('H:i:s'),
             'boleh_nilai' => $bolehNilai,
             'kartu' => [
-                'klien_aktif' => Klien::query()->where('status', 'aktif')->count(),
+                'klien_aktif' => Klien::query()->where('status', 'klien_aktif')->count(),
                 'klien_baru_bulan' => Klien::query()->where('aktif', true)
                     ->where('created_at', '>=', now()->startOfMonth())
                     ->count(),

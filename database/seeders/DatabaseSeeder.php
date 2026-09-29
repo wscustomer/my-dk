@@ -22,16 +22,20 @@ class DatabaseSeeder extends Seeder
         $sandi = (string) config('dk.admin_password');
 
         if ($sandi === '') {
-            $this->command?->warn('DK_ADMIN_PASSWORD kosong — akun admin dilewati.');
+            $this->command?->warn('DK_ADMIN_PASSWORD kosong — akun admin dilewati. Isi di .env supaya admin bisa login.');
+        } else {
+            User::updateOrCreate(
+                ['email' => $email],
+                ['name' => 'Admin Digital Konsultan', 'password' => Hash::make($sandi), 'peran' => 'admin', 'aktif' => true]
+            );
 
-            return;
+            $this->command?->info("Akun admin siap: {$email}");
         }
 
-        User::updateOrCreate(
-            ['email' => $email],
-            ['name' => 'Admin Digital Konsultan', 'password' => Hash::make($sandi), 'peran' => 'admin', 'aktif' => true]
-        );
-
-        $this->command?->info("Akun admin siap: {$email}");
+        // Data contoh volume hanya kalau diminta eksplisit — jangan dipanggil
+        // di produksi tanpa sadar.
+        if (config('dk.seed_contoh')) {
+            $this->call(DataRamaiSeeder::class);
+        }
     }
 }
