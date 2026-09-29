@@ -17,7 +17,7 @@ const p = computed(() => props.proyek);
         <div class="mx-auto max-w-2xl px-4">
             <header class="mb-5 text-center">
                 <p
-                    class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold text-white"
+                    class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-[4px] text-xs font-bold text-white"
                     :style="{ background: warna }"
                 >
                     {{ perusahaan.slice(0, 2).toUpperCase() }}

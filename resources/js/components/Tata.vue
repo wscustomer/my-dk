@@ -55,7 +55,7 @@ const inisial = computed(() => {
             >
                 <Link href="/" class="mb-5 flex items-center gap-2 px-2">
                     <span
-                        class="flex h-7 w-7 items-center justify-center rounded-md bg-blue-600 text-xs font-bold text-white"
+                        class="flex h-7 w-7 items-center justify-center rounded-[4px] bg-blue-600 text-xs font-bold text-white"
                         >DK</span
                     >
                     <span class="text-sm font-semibold text-gray-900">{{
@@ -72,7 +72,7 @@ const inisial = computed(() => {
                                 ? '/'
                                 : '/' + m.cocok.replace('*', '')
                         "
-                        class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition"
+                        class="flex items-center gap-2.5 rounded-[4px] px-2.5 py-2 text-sm transition"
                         :class="
                             aktif(m.cocok)
                                 ? 'bg-blue-50 font-medium text-blue-700'
@@ -161,7 +161,7 @@ const inisial = computed(() => {
                 <!-- Pesan -->
                 <div v-if="flash.ok || flash.galat" class="px-4 pt-4 sm:px-6">
                     <div
-                        class="dk-tutup flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm"
+                        class="dk-tutup flex items-center justify-between gap-3 rounded-[4px] px-3 py-2 text-sm"
                         :class="
                             flash.galat
                                 ? 'bg-red-50 text-red-800'

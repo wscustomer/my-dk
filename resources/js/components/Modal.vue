@@ -41,7 +41,7 @@ function kunci(e: KeyboardEvent) {
             v-focus
         >
             <div
-                class="dk-tutup w-full rounded-xl bg-white shadow-xl"
+                class="dk-tutup w-full rounded-[4px] bg-white shadow-xl"
                 :class="lebarKelas[lebar]"
             >
                 <header

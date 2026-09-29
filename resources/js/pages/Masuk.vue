@@ -15,7 +15,7 @@ function kirim() {
         <div class="w-full max-w-sm">
             <div class="mb-6 text-center">
                 <span
-                    class="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white"
+                    class="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-[4px] bg-blue-600 text-sm font-bold text-white"
                     >DK</span
                 >
                 <h1 class="text-lg font-semibold text-gray-900">

@@ -269,7 +269,9 @@ const ada = computed(() => props.daftar.data.length > 0);
             @tutup="bayarUntuk = null"
         >
             <div v-if="bayarUntuk" class="space-y-4 text-sm">
-                <div class="grid grid-cols-3 gap-2 rounded-lg bg-gray-50 p-3">
+                <div
+                    class="grid grid-cols-3 gap-2 rounded-[4px] bg-gray-50 p-3"
+                >
                     <div>
                         <p class="dk-label">Total</p>
                         <p class="tabular-nums">{{ bayarUntuk.total_teks }}</p>
@@ -288,7 +290,7 @@ const ada = computed(() => props.daftar.data.length > 0);
                     </div>
                 </div>
 
-                <div v-if="rekening" class="rounded-lg bg-gray-50 p-3">
+                <div v-if="rekening" class="rounded-[4px] bg-gray-50 p-3">
                     <p class="dk-label">Rekening pembayaran</p>
                     <ul class="mt-1 space-y-0.5">
                         <li

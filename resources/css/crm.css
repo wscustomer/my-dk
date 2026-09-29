@@ -1,11 +1,20 @@
 /**
  * Gaya bersama CRM Digital Konsultan.
  * Tailwind 4 dipakai untuk tata letak; kelas di bawah untuk potongan berulang.
+ *
+ * Bahasa visual diadaptasi dari SpaceX DESIGN.md (getdesign):
+ * radius kaku 4px, hairline presisi, rata tanpa shadow, tracking positif pada teks caps.
+ * Warna brand & badge status tetap — badge itu informasi, bukan hiasan.
  */
 
 :root {
     --dk-biru: #2196f3;
-    --dk-kel: #6b7280;
+    --dk-kel: #5a5a5f; /* SpaceX ink-mute */
+    --dk-hairline: #e0e0e8; /* SpaceX hairline-on-light */
+    --dk-hairline-lembut: #eef0f4;
+    --dk-radius: 4px; /* SpaceX rounded.xs — satu radius untuk semua chrome */
+    --dk-caps-tracking: 1.17px; /* SpaceX button-cap */
+    --dk-eyebrow-tracking: 0.96px; /* SpaceX micro-cap */
 }
 
 html,
@@ -25,21 +34,25 @@ body {
 
 /* ---------- Kepala halaman ---------- */
 .dk-judul {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1.15;
 }
 
 .dk-sub {
     font-size: 0.8125rem;
     color: var(--dk-kel);
+    letter-spacing: 0.32px;
 }
 
 /* ---------- Kartu ---------- */
+/* SpaceX: rata, hairline 1px, tanpa shadow, radius kaku */
 .dk-kartu {
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid var(--dk-hairline);
+    border-radius: var(--dk-radius);
 }
 
 .dk-kartu-p {
@@ -52,10 +65,12 @@ body {
     align-items: center;
     gap: 0.25rem;
     padding: 0.125rem 0.5rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
+    border-radius: var(--dk-radius);
+    font-size: 0.6875rem;
+    font-weight: 700;
     line-height: 1.25rem;
+    letter-spacing: var(--dk-caps-tracking);
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
@@ -65,9 +80,11 @@ body {
     align-items: center;
     gap: 0.375rem;
     padding: 0.4375rem 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: var(--dk-radius);
     font-size: 0.8125rem;
-    font-weight: 500;
+    font-weight: 700;
+    letter-spacing: var(--dk-caps-tracking);
+    text-transform: uppercase;
     border: 1px solid transparent;
     cursor: pointer;
     transition:
@@ -87,7 +104,7 @@ body {
 }
 
 .dk-tbl-utama:hover:not(:disabled) {
-    background: #1d4ed8;
+    background: #1976d2;
 }
 
 .dk-tbl-kosong {
@@ -112,7 +129,7 @@ body {
 
 .dk-tbl-halus {
     background: transparent;
-    color: #6b7280;
+    color: var(--dk-kel);
     padding: 0.25rem 0.5rem;
 }
 
@@ -126,14 +143,14 @@ body {
     width: 100%;
     padding: 0.4375rem 0.625rem;
     border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
+    border-radius: var(--dk-radius);
     font-size: 0.875rem;
     background: #fff;
     color: #111827;
 }
 
 .dk-isian:focus {
-    outline: 2px solid rgba(37, 99, 235, 0.35);
+    outline: 2px solid rgba(33, 150, 243, 0.35);
     outline-offset: -1px;
     border-color: var(--dk-biru);
 }
@@ -144,9 +161,11 @@ body {
 
 .dk-label {
     display: block;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #374151;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--dk-kel);
+    letter-spacing: var(--dk-eyebrow-tracking);
+    text-transform: uppercase;
     margin-bottom: 0.25rem;
 }
 
@@ -167,13 +186,13 @@ body {
 .dk-tabel thead th {
     text-align: left;
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #6b7280;
+    letter-spacing: var(--dk-eyebrow-tracking);
+    color: var(--dk-kel);
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid #e5e7eb;
-    background: #f9fafb;
+    border-bottom: 1px solid var(--dk-hairline);
+    background: #fafafa;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -181,12 +200,12 @@ body {
 
 .dk-tabel tbody td {
     padding: 0.5625rem 0.75rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--dk-hairline-lembut);
     vertical-align: middle;
 }
 
 .dk-tabel tbody tr:hover {
-    background: #f9fafb;
+    background: #fafafa;
 }
 
 /* ---------- Lain-lain ---------- */
@@ -199,8 +218,11 @@ body {
 
 .dk-tab {
     padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    color: #6b7280;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: var(--dk-caps-tracking);
+    text-transform: uppercase;
+    color: var(--dk-kel);
     border-bottom: 2px solid transparent;
     cursor: pointer;
 }
@@ -208,13 +230,12 @@ body {
 .dk-tab[data-aktif='true'] {
     color: var(--dk-biru);
     border-bottom-color: var(--dk-biru);
-    font-weight: 500;
 }
 
 .dk-progress {
     height: 0.375rem;
-    background: #e5e7eb;
-    border-radius: 999px;
+    background: var(--dk-hairline);
+    border-radius: var(--dk-radius);
     overflow: hidden;
 }
 
@@ -222,7 +243,7 @@ body {
     display: block;
     height: 100%;
     background: var(--dk-biru);
-    border-radius: 999px;
+    border-radius: var(--dk-radius);
     transition: width 0.3s;
 }
 
@@ -259,9 +280,9 @@ body {
 }
 
 .dk-papan-kolom {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    background: #fafafa;
+    border: 1px solid var(--dk-hairline);
+    border-radius: var(--dk-radius);
     min-height: 6rem;
 }
 

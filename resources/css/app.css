@@ -9,4 +9,19 @@
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+
+    /* SpaceX: satu radius kaku. Kartu, modal, isian, badge — semua 4px. */
+    --radius-sm: 4px;
+    --radius-md: 4px;
+    --radius-lg: 4px;
+    --radius-xl: 4px;
+    --radius-2xl: 4px;
+    --radius-3xl: 4px;
+
+    /* SpaceX: hairline presisi, bukan abu pudar */
+    --color-hairline: #e0e0e8;
+    --color-hairline-lembut: #eef0f4;
+
+    /* Warna brand — tetap, badge status tetap berwarna */
+    --color-brand: #2196f3;
 }
