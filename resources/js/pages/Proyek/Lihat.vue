@@ -103,7 +103,9 @@ function cabutPortal() {
 }
 
 const tautanPortal = computed(() =>
-    p.value.portal_token ? `${window.location.origin}/p/${p.value.portal_token}` : '',
+    p.value.portal_token
+        ? `${window.location.origin}/p/${p.value.portal_token}`
+        : '',
 );
 
 async function salinPortal() {
@@ -120,7 +122,11 @@ async function salinPortal() {
     <Tata>
         <Kepala
             :judul="proyek.nama"
-            :sub="[proyek.kode, proyek.label_jenis, proyek.pemilik].filter(Boolean).join(' · ')"
+            :sub="
+                [proyek.kode, proyek.label_jenis, proyek.pemilik]
+                    .filter(Boolean)
+                    .join(' · ')
+            "
             :kembali="rute.proyek"
             kembali-teks="Daftar proyek"
         >
@@ -129,11 +135,15 @@ async function salinPortal() {
                 <button
                     type="button"
                     class="dk-tbl dk-tbl-kosong"
-                    @click="((formS.status = proyek.status), (modalStatus = true))"
+                    @click="
+                        ((formS.status = proyek.status), (modalStatus = true))
+                    "
                 >
                     Ubah status
                 </button>
-                <Link :href="rute.proyekUbah(proyek.id)" class="dk-tbl dk-tbl-kosong"
+                <Link
+                    :href="rute.proyekUbah(proyek.id)"
+                    class="dk-tbl dk-tbl-kosong"
                     >Ubah</Link
                 >
             </template>
@@ -156,12 +166,15 @@ async function salinPortal() {
                             <span :style="{ width: proyek.persen + '%' }" />
                         </div>
                         <p class="dk-sub mt-1">
-                            {{ proyek.persen }}% · {{ proyek.tahap || 'tanpa tahapan' }}
+                            {{ proyek.persen }}% ·
+                            {{ proyek.tahap || 'tanpa tahapan' }}
                         </p>
                     </div>
                     <div>
                         <p class="dk-label">Nilai kontrak</p>
-                        <p class="font-medium tabular-nums">{{ proyek.nilai_teks }}</p>
+                        <p class="font-medium tabular-nums">
+                            {{ proyek.nilai_teks }}
+                        </p>
                         <p v-if="proyek.dp_nominal > 0" class="dk-sub">
                             DP {{ proyek.dp_teks }}
                         </p>
@@ -169,11 +182,23 @@ async function salinPortal() {
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <p class="dk-label">Mulai</p>
-                            <p>{{ proyek.tgl_mulai ? bulan(proyek.tgl_mulai) : '—' }}</p>
+                            <p>
+                                {{
+                                    proyek.tgl_mulai
+                                        ? bulan(proyek.tgl_mulai)
+                                        : '—'
+                                }}
+                            </p>
                         </div>
                         <div>
                             <p class="dk-label">Target</p>
-                            <p>{{ proyek.tgl_target ? bulan(proyek.tgl_target) : '—' }}</p>
+                            <p>
+                                {{
+                                    proyek.tgl_target
+                                        ? bulan(proyek.tgl_target)
+                                        : '—'
+                                }}
+                            </p>
                         </div>
                     </div>
                     <div v-if="proyek.tgl_serah">
@@ -249,7 +274,13 @@ async function salinPortal() {
                     <p class="dk-label mb-2">Tindakan</p>
                     <div class="flex flex-col gap-1.5">
                         <Link
-                            :href="rute.tagihanBaru + '?klien=' + proyek.klien_id + '&proyek=' + proyek.id"
+                            :href="
+                                rute.tagihanBaru +
+                                '?klien=' +
+                                proyek.klien_id +
+                                '&proyek=' +
+                                proyek.id
+                            "
                             class="dk-tbl dk-tbl-kosong justify-center"
                             >+ Tagihan</Link
                         >
@@ -265,7 +296,9 @@ async function salinPortal() {
             </aside>
 
             <section class="lg:col-span-3">
-                <div class="mb-3 flex flex-wrap items-center gap-1 border-b border-gray-200">
+                <div
+                    class="mb-3 flex flex-wrap items-center gap-1 border-b border-gray-200"
+                >
                     <button
                         v-for="t in tabs"
                         :key="t.kunci"
@@ -291,7 +324,10 @@ async function salinPortal() {
 
                 <!-- Tahapan -->
                 <div v-show="tab === 'tahapan'" class="dk-kartu">
-                    <div v-if="proyek.tahapan.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="proyek.tahapan.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <button
                             v-for="t in proyek.tahapan"
                             :key="t.id"
@@ -302,8 +338,14 @@ async function salinPortal() {
                             <span
                                 class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px]"
                                 :style="{
-                                    borderColor: t.status === 'selesai' ? '#16a34a' : '#d1d5db',
-                                    color: t.status === 'selesai' ? '#16a34a' : '#9ca3af',
+                                    borderColor:
+                                        t.status === 'selesai'
+                                            ? '#16a34a'
+                                            : '#d1d5db',
+                                    color:
+                                        t.status === 'selesai'
+                                            ? '#16a34a'
+                                            : '#9ca3af',
                                 }"
                             >
                                 {{ t.status === 'selesai' ? '✓' : t.urutan }}
@@ -321,13 +363,16 @@ async function salinPortal() {
                                 </p>
                                 <p class="dk-sub">
                                     {{ t.label_status
-                                    }}<span v-if="t.tgl_teks"> · {{ t.tgl_teks }}</span>
+                                    }}<span v-if="t.tgl_teks">
+                                        · {{ t.tgl_teks }}</span
+                                    >
                                 </p>
                             </div>
                             <Badge
                                 :teks="t.label_status"
                                 :warna="
-                                    (opsi.status as any)?.[t.status] || '#6b7280'
+                                    (opsi.status as any)?.[t.status] ||
+                                    '#6b7280'
                                 "
                             />
                         </button>
@@ -336,7 +381,10 @@ async function salinPortal() {
                 </div>
 
                 <!-- Tagihan -->
-                <div v-show="tab === 'tagihan'" class="dk-kartu overflow-x-auto">
+                <div
+                    v-show="tab === 'tagihan'"
+                    class="dk-kartu overflow-x-auto"
+                >
                     <table v-if="proyek.tagihan.length" class="dk-tabel">
                         <thead>
                             <tr>
@@ -356,7 +404,10 @@ async function salinPortal() {
                                     }}</span>
                                 </td>
                                 <td>
-                                    <Badge :teks="t.label_state" :warna="t.warna_state || '#6b7280'" />
+                                    <Badge
+                                        :teks="t.label_state"
+                                        :warna="t.warna_state || '#6b7280'"
+                                    />
                                 </td>
                                 <td class="text-right tabular-nums">
                                     {{ t.total_teks }}
@@ -370,7 +421,11 @@ async function salinPortal() {
                             </tr>
                         </tbody>
                     </table>
-                    <Kosong v-else teks="Belum ada tagihan untuk proyek ini." ikon="▤" />
+                    <Kosong
+                        v-else
+                        teks="Belum ada tagihan untuk proyek ini."
+                        ikon="▤"
+                    />
                 </div>
 
                 <!-- Aktivitas -->
@@ -387,14 +442,20 @@ async function salinPortal() {
                             + Catat
                         </button>
                     </header>
-                    <div v-if="proyek.aktivitas.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="proyek.aktivitas.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <div
                             v-for="a in proyek.aktivitas"
                             :key="a.id"
                             class="px-4 py-2.5"
                         >
                             <p class="text-sm text-gray-800">{{ a.judul }}</p>
-                            <p v-if="a.catatan" class="dk-sub whitespace-pre-line">
+                            <p
+                                v-if="a.catatan"
+                                class="dk-sub whitespace-pre-line"
+                            >
                                 {{ a.catatan }}
                             </p>
                             <p class="dk-sub mt-0.5">
@@ -420,7 +481,10 @@ async function salinPortal() {
                             + Unggah
                         </button>
                     </header>
-                    <div v-if="proyek.lampiran.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="proyek.lampiran.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <div
                             v-for="l in proyek.lampiran"
                             :key="l.id"
@@ -431,7 +495,8 @@ async function salinPortal() {
                                     {{ l.nama }}
                                 </p>
                                 <p class="dk-sub">
-                                    {{ l.jenis }} · {{ l.ukuran }} · {{ l.diunggah }}
+                                    {{ l.jenis }} · {{ l.ukuran }} ·
+                                    {{ l.diunggah }}
                                 </p>
                             </div>
                             <a
@@ -466,7 +531,11 @@ async function salinPortal() {
                 <div class="grid grid-cols-2 gap-3">
                     <label class="block">
                         <span class="dk-label">Mulai</span>
-                        <input v-model="formTahapan.tgl_mulai" type="date" class="dk-isian" />
+                        <input
+                            v-model="formTahapan.tgl_mulai"
+                            type="date"
+                            class="dk-isian"
+                        />
                     </label>
                     <label class="block">
                         <span class="dk-label">Selesai</span>
@@ -479,7 +548,11 @@ async function salinPortal() {
                 </div>
                 <label class="block">
                     <span class="dk-label">Catatan</span>
-                    <textarea v-model="formTahapan.catatan" rows="2" class="dk-isian" />
+                    <textarea
+                        v-model="formTahapan.catatan"
+                        rows="2"
+                        class="dk-isian"
+                    />
                 </label>
                 <div class="flex justify-end gap-2 pt-1">
                     <button
@@ -501,12 +574,21 @@ async function salinPortal() {
         </Modal>
 
         <!-- Modal status -->
-        <Modal :buka="modalStatus" judul="Ubah status proyek" lebar="sm" @tutup="modalStatus = false">
+        <Modal
+            :buka="modalStatus"
+            judul="Ubah status proyek"
+            lebar="sm"
+            @tutup="modalStatus = false"
+        >
             <form class="space-y-3" @submit.prevent="simpanStatus">
                 <label class="block">
                     <span class="dk-label">Status baru</span>
                     <select v-model="formS.status" class="dk-isian">
-                        <option v-for="(v, k) in opsi.status" :key="k" :value="k">
+                        <option
+                            v-for="(v, k) in opsi.status"
+                            :key="k"
+                            :value="k"
+                        >
                             {{ v }}
                         </option>
                     </select>
@@ -542,7 +624,9 @@ async function salinPortal() {
         >
             <form class="space-y-3" @submit.prevent="simpanAktivitas">
                 <label class="block">
-                    <span class="dk-label">Judul<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Judul<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="formA.judul" class="dk-isian" autofocus />
                 </label>
                 <div class="grid gap-3 sm:grid-cols-2">
@@ -560,12 +644,20 @@ async function salinPortal() {
                     </label>
                     <label class="block">
                         <span class="dk-label">Tanggal</span>
-                        <input v-model="formA.tgl" type="date" class="dk-isian" />
+                        <input
+                            v-model="formA.tgl"
+                            type="date"
+                            class="dk-isian"
+                        />
                     </label>
                 </div>
                 <label class="block">
                     <span class="dk-label">Catatan</span>
-                    <textarea v-model="formA.catatan" rows="3" class="dk-isian" />
+                    <textarea
+                        v-model="formA.catatan"
+                        rows="3"
+                        class="dk-isian"
+                    />
                 </label>
                 <div class="flex justify-end gap-2 pt-1">
                     <button
@@ -597,7 +689,9 @@ async function salinPortal() {
                     type="file"
                     class="dk-isian"
                     accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.webp,.zip"
-                    @change="(e: any) => (formL.berkas = e.target.files?.[0] || null)"
+                    @change="
+                        (e: any) => (formL.berkas = e.target.files?.[0] || null)
+                    "
                 />
                 <span v-if="formL.errors.berkas" class="dk-galat">{{
                     formL.errors.berkas

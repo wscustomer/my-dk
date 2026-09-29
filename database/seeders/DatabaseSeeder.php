@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PengaturanSeeder::class);
 
-        $email = (string) env('DK_ADMIN_EMAIL', 'admin@digitalkonsultan.com');
-        $sandi = (string) env('DK_ADMIN_PASSWORD', '');
+        $email = (string) config('dk.admin_email');
+        $sandi = (string) config('dk.admin_password');
 
         if ($sandi === '') {
             $this->command?->warn('DK_ADMIN_PASSWORD kosong — akun admin dilewati.');

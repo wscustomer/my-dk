@@ -41,15 +41,23 @@ function kirim() {
     <Tata>
         <Kepala
             :judul="baru ? 'Klien baru' : 'Ubah klien'"
-            :sub="baru ? 'Isi data pokok. Detail bisa ditambah nanti.' : klien.nama"
-            :kembali="kembali || (baru ? rute.klien : rute.klienDetail(klien.id))"
+            :sub="
+                baru
+                    ? 'Isi data pokok. Detail bisa ditambah nanti.'
+                    : klien.nama
+            "
+            :kembali="
+                kembali || (baru ? rute.klien : rute.klienDetail(klien.id))
+            "
             :kembali-teks="baru ? 'Daftar klien' : 'Halaman klien'"
         />
 
         <form class="max-w-3xl space-y-4" @submit.prevent="kirim">
             <div class="dk-kartu dk-kartu-p grid gap-3 sm:grid-cols-2">
                 <label class="block sm:col-span-2">
-                    <span class="dk-label">Nama<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nama<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="form.nama" class="dk-isian" autofocus />
                     <span v-if="form.errors.nama" class="dk-galat">{{
                         form.errors.nama
@@ -91,7 +99,11 @@ function kirim() {
                 <label class="block">
                     <span class="dk-label">Status</span>
                     <select v-model="form.status" class="dk-isian">
-                        <option v-for="(v, k) in opsi.status" :key="k" :value="k">
+                        <option
+                            v-for="(v, k) in opsi.status"
+                            :key="k"
+                            :value="k"
+                        >
                             {{ (v as string[])[0] }}
                         </option>
                     </select>
@@ -100,23 +112,36 @@ function kirim() {
                 <label class="block">
                     <span class="dk-label">Sumber</span>
                     <select v-model="form.sumber" class="dk-isian">
-                        <option v-for="(v, k) in opsi.sumber" :key="k" :value="k">
+                        <option
+                            v-for="(v, k) in opsi.sumber"
+                            :key="k"
+                            :value="k"
+                        >
                             {{ v }}
                         </option>
                     </select>
                 </label>
 
-                <label v-if="form.sumber === 'lain'" class="block sm:col-span-2">
+                <label
+                    v-if="form.sumber === 'lain'"
+                    class="block sm:col-span-2"
+                >
                     <span class="dk-label">Sumber lain-lain</span>
                     <input v-model="form.sumber_lain" class="dk-isian" />
                 </label>
 
                 <label class="block sm:col-span-2">
                     <span class="dk-label">Catatan</span>
-                    <textarea v-model="form.catatan" rows="3" class="dk-isian" />
+                    <textarea
+                        v-model="form.catatan"
+                        rows="3"
+                        class="dk-isian"
+                    />
                 </label>
 
-                <label class="flex items-center gap-2 text-sm text-gray-700 sm:col-span-2">
+                <label
+                    class="flex items-center gap-2 text-sm text-gray-700 sm:col-span-2"
+                >
                     <input v-model="form.aktif" type="checkbox" />
                     Klien aktif (tampil di pemilih proyek)
                 </label>
@@ -125,7 +150,8 @@ function kirim() {
             <div class="flex justify-end gap-2">
                 <Link
                     :href="
-                        kembali || (baru ? rute.klien : rute.klienDetail(klien.id))
+                        kembali ||
+                        (baru ? rute.klien : rute.klienDetail(klien.id))
                     "
                     class="dk-tbl dk-tbl-kosong"
                     >Batal</Link

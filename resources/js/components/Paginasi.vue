@@ -42,10 +42,16 @@ const tautan = computed(() =>
                     v-if="t.url"
                     :href="t.url"
                     class="dk-tbl dk-tbl-kosong"
-                    :class="t.aktif ? '!border-blue-600 !bg-blue-600 !text-white' : ''"
+                    :class="
+                        t.aktif
+                            ? '!border-blue-600 !bg-blue-600 !text-white'
+                            : ''
+                    "
                     >{{ t.label }}</a
                 >
-                <span v-else class="px-2 text-xs text-gray-400">{{ t.label }}</span>
+                <span v-else class="px-2 text-xs text-gray-400">{{
+                    t.label
+                }}</span>
             </template>
         </nav>
     </div>

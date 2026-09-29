@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Klien;
 use App\Models\Proyek;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -20,8 +19,8 @@ class TarikWscrm extends Command
 
     public function handle(): int
     {
-        $base = rtrim((string) env('WSCRM_URL', ''), '/');
-        $token = (string) env('WSCRM_TOKEN', '');
+        $base = rtrim((string) config('dk.wscrm_url'), '/');
+        $token = (string) config('dk.wscrm_token');
 
         if ($base === '' || $token === '') {
             $this->warn('WSCRM_URL / WSCRM_TOKEN belum diisi di .env — dilewati.');
@@ -40,7 +39,7 @@ class TarikWscrm extends Command
             }
             $layanan = $res->json('data') ?? $res->json() ?? [];
         } catch (\Throwable $e) {
-            $this->error('Koneksi WSCRM gagal: ' . $e->getMessage());
+            $this->error('Koneksi WSCRM gagal: '.$e->getMessage());
 
             return self::FAILURE;
         }
@@ -63,7 +62,7 @@ class TarikWscrm extends Command
                 ->when($email !== '', fn ($q) => $q->where('email', $email))
                 ->orWhere(function ($q) use ($domain) {
                     $q->where('catatan', 'like', "%{$domain}%")
-                        ->orWhere('perusahaan', 'like', '%' . explode('.', $domain)[0] . '%');
+                        ->orWhere('perusahaan', 'like', '%'.explode('.', $domain)[0].'%');
                 })
                 ->first();
 
@@ -71,9 +70,9 @@ class TarikWscrm extends Command
                 continue;
             }
 
-            $teks = 'WSCRM: layanan ' . $domain
-                . (! empty($l['paket']) ? " ({$l['paket']})" : '')
-                . (! empty($l['jatuh_tempo']) ? " jatuh tempo {$l['jatuh_tempo']}" : '');
+            $teks = 'WSCRM: layanan '.$domain
+                .(! empty($l['paket']) ? " ({$l['paket']})" : '')
+                .(! empty($l['jatuh_tempo']) ? " jatuh tempo {$l['jatuh_tempo']}" : '');
 
             if ($klien->aktivitas()->where('judul', $teks)->whereDate('created_at', now()->toDateString())->exists()) {
                 continue;

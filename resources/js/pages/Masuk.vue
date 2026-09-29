@@ -10,9 +10,7 @@ function kirim() {
 
 <template>
     <Head title="Masuk" />
-    <div
-        class="flex min-h-screen items-center justify-center bg-gray-50 px-4"
-    >
+    <div class="flex min-h-screen items-center justify-center bg-gray-50 px-4">
         <div class="w-full max-w-sm">
             <div class="mb-6 text-center">
                 <span
@@ -22,7 +20,9 @@ function kirim() {
                 <h1 class="text-lg font-semibold text-gray-900">
                     CRM Digital Konsultan
                 </h1>
-                <p class="dk-sub mt-0.5">Masuk untuk mengelola klien & proyek</p>
+                <p class="dk-sub mt-0.5">
+                    Masuk untuk mengelola klien & proyek
+                </p>
             </div>
 
             <form class="dk-kartu dk-kartu-p space-y-3" @submit.prevent="kirim">

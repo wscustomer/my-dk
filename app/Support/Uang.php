@@ -2,8 +2,6 @@
 
 namespace App\Support;
 
-use Carbon\CarbonImmutable;
-
 class Uang
 {
     /** "Rp 12.500.000" — tanpa desimal bila bulat. */
@@ -12,7 +10,7 @@ class Uang
         $angka = (float) ($nominal ?? 0);
         $bulat = abs($angka - round($angka)) < 0.005;
 
-        return 'Rp ' . number_format($angka, $bulat ? 0 : 2, ',', '.');
+        return 'Rp '.number_format($angka, $bulat ? 0 : 2, ',', '.');
     }
 
     /** Alias biar tidak ada dua nama untuk satu hal. */

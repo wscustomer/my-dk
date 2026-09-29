@@ -38,10 +38,17 @@ const grup = [
 <template>
     <Head title="Pengaturan" />
     <Tata>
-        <Kepala judul="Pengaturan" sub="Identitas usaha, penagihan, dan hak akses">
+        <Kepala
+            judul="Pengaturan"
+            sub="Identitas usaha, penagihan, dan hak akses"
+        >
             <template #aksi>
-                <Link :href="rute.pengguna" class="dk-tbl dk-tbl-kosong">Pengguna</Link>
-                <Link :href="rute.pengaturanTahapan" class="dk-tbl dk-tbl-kosong"
+                <Link :href="rute.pengguna" class="dk-tbl dk-tbl-kosong"
+                    >Pengguna</Link
+                >
+                <Link
+                    :href="rute.pengaturanTahapan"
+                    class="dk-tbl dk-tbl-kosong"
                     >Template tahapan</Link
                 >
             </template>
@@ -52,21 +59,34 @@ const grup = [
                 <h2 class="text-sm font-semibold">Identitas usaha</h2>
 
                 <label class="block">
-                    <span class="dk-label">Nama perusahaan<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nama perusahaan<span class="text-red-500">
+                            *</span
+                        ></span
+                    >
                     <input v-model="form.nama_perusahaan" class="dk-isian" />
                 </label>
 
                 <div class="grid gap-3 sm:grid-cols-2">
                     <label class="block">
                         <span class="dk-label">Email</span>
-                        <input v-model="form.email_perusahaan" type="email" class="dk-isian" />
-                        <span v-if="form.errors.email_perusahaan" class="dk-galat">{{
-                            form.errors.email_perusahaan
-                        }}</span>
+                        <input
+                            v-model="form.email_perusahaan"
+                            type="email"
+                            class="dk-isian"
+                        />
+                        <span
+                            v-if="form.errors.email_perusahaan"
+                            class="dk-galat"
+                            >{{ form.errors.email_perusahaan }}</span
+                        >
                     </label>
                     <label class="block">
                         <span class="dk-label">Telepon</span>
-                        <input v-model="form.telepon_perusahaan" class="dk-isian" />
+                        <input
+                            v-model="form.telepon_perusahaan"
+                            class="dk-isian"
+                        />
                     </label>
                 </div>
 
@@ -78,7 +98,10 @@ const grup = [
                             type="color"
                             class="h-9 w-14 cursor-pointer rounded border border-gray-300"
                         />
-                        <input v-model="form.warna_utama" class="dk-isian max-w-[9rem]" />
+                        <input
+                            v-model="form.warna_utama"
+                            class="dk-isian max-w-[9rem]"
+                        />
                     </div>
                     <span v-if="form.errors.warna_utama" class="dk-galat">{{
                         form.errors.warna_utama
@@ -111,9 +134,14 @@ const grup = [
                 </label>
 
                 <label class="block">
-                    <span class="dk-label">Catatan rekening (tampil di tagihan)</span>
+                    <span class="dk-label"
+                        >Catatan rekening (tampil di tagihan)</span
+                    >
                     <input
-                        :value="nilai.find((n) => n.kunci === 'rekening_bank')?.nilai"
+                        :value="
+                            nilai.find((n) => n.kunci === 'rekening_bank')
+                                ?.nilai
+                        "
                         class="dk-isian"
                         readonly
                     />
@@ -127,8 +155,13 @@ const grup = [
             <div class="dk-kartu dk-kartu-p space-y-3">
                 <h2 class="text-sm font-semibold">Akses</h2>
                 <label class="block">
-                    <span class="dk-label">Siapa yang boleh melihat nilai kontrak</span>
-                    <select v-model="form.peran_boleh_lihat_nilai" class="dk-isian max-w-xs">
+                    <span class="dk-label"
+                        >Siapa yang boleh melihat nilai kontrak</span
+                    >
+                    <select
+                        v-model="form.peran_boleh_lihat_nilai"
+                        class="dk-isian max-w-xs"
+                    >
                         <option value="admin">Hanya admin</option>
                         <option value="staf">Admin & staf</option>
                         <option value="semua">Semua pengguna</option>

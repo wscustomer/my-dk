@@ -34,11 +34,16 @@ const p = computed(() => props.proyek);
             <div class="dk-kartu dk-kartu-p mb-4">
                 <div class="mb-2 flex items-center justify-between text-sm">
                     <span class="text-gray-600">{{ proyek.status }}</span>
-                    <span class="font-medium tabular-nums">{{ proyek.persen }}%</span>
+                    <span class="font-medium tabular-nums"
+                        >{{ proyek.persen }}%</span
+                    >
                 </div>
                 <div class="dk-progress">
                     <span
-                        :style="{ width: proyek.persen + '%', background: warna }"
+                        :style="{
+                            width: proyek.persen + '%',
+                            background: warna,
+                        }"
                     />
                 </div>
                 <p v-if="proyek.tahap" class="dk-sub mt-2">
@@ -65,10 +70,14 @@ const p = computed(() => props.proyek);
                         <span
                             class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px]"
                             :style="{
-                                borderColor: t.status === 'selesai' ? warna : '#d1d5db',
-                                color: t.status === 'selesai' ? warna : '#9ca3af',
+                                borderColor:
+                                    t.status === 'selesai' ? warna : '#d1d5db',
+                                color:
+                                    t.status === 'selesai' ? warna : '#9ca3af',
                                 background:
-                                    t.status === 'selesai' ? warna + '14' : 'transparent',
+                                    t.status === 'selesai'
+                                        ? warna + '14'
+                                        : 'transparent',
                             }"
                         >
                             {{ t.status === 'selesai' ? '✓' : t.urutan }}
@@ -88,7 +97,9 @@ const p = computed(() => props.proyek);
                             </p>
                             <p class="dk-sub">
                                 {{ t.label_status
-                                }}<span v-if="t.tgl_teks"> · {{ t.tgl_teks }}</span>
+                                }}<span v-if="t.tgl_teks">
+                                    · {{ t.tgl_teks }}</span
+                                >
                             </p>
                             <p v-if="t.catatan" class="dk-sub mt-0.5 italic">
                                 {{ t.catatan }}
@@ -113,7 +124,7 @@ const p = computed(() => props.proyek);
                 >
             </p>
 
-            <footer class="mt-6 text-center dk-sub">
+            <footer class="dk-sub mt-6 text-center">
                 <p>
                     Halaman ini hanya menampilkan progres. Untuk pertanyaan,
                     hubungi kami langsung.

@@ -27,7 +27,12 @@ function bukaBaru(jenis: string) {
     form.id = null;
     form.jenis = jenis;
     form.urutan =
-        Math.max(0, ...props.tahapan.filter((t) => t.jenis === jenis).map((t) => t.urutan)) + 1;
+        Math.max(
+            0,
+            ...props.tahapan
+                .filter((t) => t.jenis === jenis)
+                .map((t) => t.urutan),
+        ) + 1;
     form.nama = '';
     form.aktif = true;
     modal.value = true;
@@ -51,12 +56,17 @@ function simpan() {
 }
 
 function hapus(t: any) {
-    if (!confirm(`Hapus tahapan "${t.nama}" dari template ${t.label_jenis}?`)) return;
-    useForm({ hapus: t.id }).post(rute.pengaturanTahapan, { preserveScroll: true });
+    if (!confirm(`Hapus tahapan "${t.nama}" dari template ${t.label_jenis}?`))
+        return;
+    useForm({ hapus: t.id }).post(rute.pengaturanTahapan, {
+        preserveScroll: true,
+    });
 }
 
 function kelompok(jenis: string) {
-    return props.tahapan.filter((t) => t.jenis === jenis).sort((a, b) => a.urutan - b.urutan);
+    return props.tahapan
+        .filter((t) => t.jenis === jenis)
+        .sort((a, b) => a.urutan - b.urutan);
 }
 </script>
 
@@ -71,7 +81,11 @@ function kelompok(jenis: string) {
         />
 
         <div class="grid gap-4 lg:grid-cols-3">
-            <section v-for="(label, jenis) in jenis" :key="jenis" class="dk-kartu">
+            <section
+                v-for="(label, kode) in jenis"
+                :key="kode"
+                class="dk-kartu"
+            >
                 <header
                     class="flex items-center justify-between border-b border-gray-100 px-4 py-2.5"
                 >
@@ -79,21 +93,27 @@ function kelompok(jenis: string) {
                     <button
                         type="button"
                         class="dk-tbl dk-tbl-halus"
-                        @click="bukaBaru(jenis as string)"
+                        @click="bukaBaru(String(kode))"
                     >
                         +
                     </button>
                 </header>
                 <ol class="divide-y divide-gray-50">
                     <li
-                        v-for="t in kelompok(jenis as string)"
+                        v-for="t in kelompok(String(kode))"
                         :key="t.id"
                         class="flex items-center gap-2 px-4 py-2"
                     >
-                        <span class="dk-sub w-5 shrink-0 tabular-nums">{{ t.urutan }}.</span>
+                        <span class="dk-sub w-5 shrink-0 tabular-nums"
+                            >{{ t.urutan }}.</span
+                        >
                         <span
                             class="min-w-0 flex-1 truncate text-sm"
-                            :class="t.aktif ? 'text-gray-800' : 'text-gray-400 line-through'"
+                            :class="
+                                t.aktif
+                                    ? 'text-gray-800'
+                                    : 'text-gray-400 line-through'
+                            "
                             >{{ t.nama }}</span
                         >
                         <button
@@ -112,7 +132,7 @@ function kelompok(jenis: string) {
                         </button>
                     </li>
                     <li
-                        v-if="!kelompok(jenis as string).length"
+                        v-if="!kelompok(String(kode)).length"
                         class="dk-kosong !py-6"
                     >
                         Belum ada tahapan.
@@ -137,7 +157,9 @@ function kelompok(jenis: string) {
                     </select>
                 </label>
                 <label class="block">
-                    <span class="dk-label">Nama tahapan<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nama tahapan<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="form.nama" class="dk-isian" autofocus />
                 </label>
                 <label class="block">

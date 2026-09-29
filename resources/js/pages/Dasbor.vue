@@ -120,7 +120,9 @@ onBeforeUnmount(() => {
                     <header
                         class="flex items-center justify-between border-b border-gray-100 px-4 py-2.5"
                     >
-                        <h2 class="text-sm font-semibold">Perlu tindakan hari ini</h2>
+                        <h2 class="text-sm font-semibold">
+                            Perlu tindakan hari ini
+                        </h2>
                     </header>
 
                     <div
@@ -145,7 +147,9 @@ onBeforeUnmount(() => {
                                     <p class="truncate text-sm text-gray-800">
                                         {{ t.nama }}
                                     </p>
-                                    <p class="dk-sub">{{ t.kode }} · {{ t.proyek }}</p>
+                                    <p class="dk-sub">
+                                        {{ t.kode }} · {{ t.proyek }}
+                                    </p>
                                 </div>
                                 <span
                                     class="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-medium text-red-700"
@@ -169,7 +173,9 @@ onBeforeUnmount(() => {
                                     <p class="truncate text-sm text-gray-800">
                                         {{ p.nama }}
                                     </p>
-                                    <p class="dk-sub">{{ p.kode }} · {{ p.klien }}</p>
+                                    <p class="dk-sub">
+                                        {{ p.kode }} · {{ p.klien }}
+                                    </p>
                                 </div>
                                 <span
                                     class="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-medium text-red-700"
@@ -195,7 +201,9 @@ onBeforeUnmount(() => {
                                     </p>
                                     <p class="dk-sub">
                                         {{ t.klien
-                                        }}<span v-if="t.proyek"> · {{ t.proyek }}</span>
+                                        }}<span v-if="t.proyek">
+                                            · {{ t.proyek }}</span
+                                        >
                                     </p>
                                 </div>
                                 <span
@@ -207,20 +215,28 @@ onBeforeUnmount(() => {
                                     "
                                 >
                                     {{ t.tgl_teks }}
-                                    <span v-if="t.sisa_teks" class="dk-sub block">{{
-                                        t.sisa_teks
-                                    }}</span>
+                                    <span
+                                        v-if="t.sisa_teks"
+                                        class="dk-sub block"
+                                        >{{ t.sisa_teks }}</span
+                                    >
                                 </span>
                             </Link>
                         </div>
                     </div>
 
-                    <Kosong v-else teks="Tidak ada yang lewat tenggat. Bersih." ikon="✓" />
+                    <Kosong
+                        v-else
+                        teks="Tidak ada yang lewat tenggat. Bersih."
+                        ikon="✓"
+                    />
                 </div>
 
                 <!-- Proyek per status -->
                 <div class="dk-kartu dk-kartu-p">
-                    <h2 class="mb-2 text-sm font-semibold">Proyek per status</h2>
+                    <h2 class="mb-2 text-sm font-semibold">
+                        Proyek per status
+                    </h2>
                     <div class="flex flex-wrap gap-1.5">
                         <Link
                             v-for="(label, kunci) in status"
@@ -239,7 +255,10 @@ onBeforeUnmount(() => {
                 <header class="border-b border-gray-100 px-4 py-2.5">
                     <h2 class="text-sm font-semibold">Aktivitas terakhir</h2>
                 </header>
-                <div v-if="hidup.linimasa.length" class="divide-y divide-gray-50">
+                <div
+                    v-if="hidup.linimasa.length"
+                    class="divide-y divide-gray-50"
+                >
                     <component
                         :is="a.tautan ? Link : 'div'"
                         v-for="a in hidup.linimasa"

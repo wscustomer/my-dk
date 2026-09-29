@@ -34,7 +34,11 @@ watch([status, urutan], terapkan);
 function terapkan() {
     router.get(
         rute.klien,
-        { q: q.value || undefined, status: status.value || undefined, urutan: urutan.value },
+        {
+            q: q.value || undefined,
+            status: status.value || undefined,
+            urutan: urutan.value,
+        },
         { preserveState: true, preserveScroll: true, replace: true },
     );
 }
@@ -52,7 +56,11 @@ async function bukaDetail(k: any) {
     memuatDetail.value = true;
     try {
         const res = await fetch(rute.klienDetail(k.id), {
-            headers: { Accept: 'application/json', 'X-Inertia': 'true', 'X-Inertia-Version': '' },
+            headers: {
+                Accept: 'application/json',
+                'X-Inertia': 'true',
+                'X-Inertia-Version': '',
+            },
             credentials: 'same-origin',
         });
         // Inertia balas JSON penuh; ambil props-nya.
@@ -66,7 +74,8 @@ async function bukaDetail(k: any) {
 }
 
 function hapus(k: any) {
-    if (!confirm(`Hapus klien "${k.nama}"? Data tidak bisa dikembalikan.`)) return;
+    if (!confirm(`Hapus klien "${k.nama}"? Data tidak bisa dikembalikan.`))
+        return;
     router.delete(`/klien/${k.id}`, { preserveScroll: true });
 }
 
@@ -76,13 +85,20 @@ const ada = computed(() => props.daftar.data.length > 0);
 <template>
     <Head title="Klien" />
     <Tata>
-        <Kepala :judul="`Klien (${daftar.total})`" sub="Prospek, klien aktif, dan pelanggan lama">
+        <Kepala
+            :judul="`Klien (${daftar.total})`"
+            sub="Prospek, klien aktif, dan pelanggan lama"
+        >
             <template #aksi>
-                <a :href="rute.klienUnduh" class="dk-tbl dk-tbl-kosong">↓ CSV</a>
+                <a :href="rute.klienUnduh" class="dk-tbl dk-tbl-kosong"
+                    >↓ CSV</a
+                >
                 <Link :href="rute.klienImpor" class="dk-tbl dk-tbl-kosong"
                     >Impor prospek</Link
                 >
-                <Link :href="rute.klienBaru" class="dk-tbl dk-tbl-utama">+ Klien</Link>
+                <Link :href="rute.klienBaru" class="dk-tbl dk-tbl-utama"
+                    >+ Klien</Link
+                >
             </template>
         </Kepala>
 
@@ -140,7 +156,8 @@ const ada = computed(() => props.daftar.data.length > 0);
                                         k.nama
                                     }}</span>
                                     <span class="dk-sub block">
-                                        {{ k.kode }}<span v-if="k.perusahaan">
+                                        {{ k.kode
+                                        }}<span v-if="k.perusahaan">
                                             · {{ k.perusahaan }}</span
                                         >
                                     </span>
@@ -153,14 +170,22 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 <span v-if="k.telepon" class="block text-xs">{{
                                     k.telepon
                                 }}</span>
-                                <span v-if="!k.email && !k.telepon" class="text-gray-300"
+                                <span
+                                    v-if="!k.email && !k.telepon"
+                                    class="text-gray-300"
                                     >—</span
                                 >
                             </td>
                             <td>
                                 <Badge
-                                    :teks="(opsi.status[k.status] as string[])?.[0] || k.status"
-                                    :warna="(opsi.status[k.status] as string[])?.[1]"
+                                    :teks="
+                                        (
+                                            opsi.status[k.status] as string[]
+                                        )?.[0] || k.status
+                                    "
+                                    :warna="
+                                        (opsi.status[k.status] as string[])?.[1]
+                                    "
                                 />
                                 <span
                                     v-if="!k.aktif"
@@ -205,7 +230,9 @@ const ada = computed(() => props.daftar.data.length > 0);
         >
             <p v-if="memuatDetail" class="dk-sub">Memuat…</p>
             <div v-else-if="detail" class="space-y-3 text-sm">
-                <p class="dk-sub">{{ detail.kode }} · {{ detail.label_status }}</p>
+                <p class="dk-sub">
+                    {{ detail.kode }} · {{ detail.label_status }}
+                </p>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <p class="dk-label">Perusahaan</p>

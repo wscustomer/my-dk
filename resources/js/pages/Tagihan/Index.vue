@@ -85,8 +85,12 @@ const ada = computed(() => props.daftar.data.length > 0);
     <Tata>
         <Kepala judul="Tagihan" sub="Piutang, pembayaran, dan status penagihan">
             <template #aksi>
-                <a :href="rute.tagihanUnduh" class="dk-tbl dk-tbl-kosong">↓ CSV</a>
-                <Link :href="rute.tagihanBaru" class="dk-tbl dk-tbl-utama">+ Tagihan</Link>
+                <a :href="rute.tagihanUnduh" class="dk-tbl dk-tbl-kosong"
+                    >↓ CSV</a
+                >
+                <Link :href="rute.tagihanBaru" class="dk-tbl dk-tbl-utama"
+                    >+ Tagihan</Link
+                >
             </template>
         </Kepala>
 
@@ -100,19 +104,19 @@ const ada = computed(() => props.daftar.data.length > 0);
             </div>
             <div class="dk-kartu dk-kartu-p">
                 <p class="dk-sub">Terbayar</p>
-                <p class="text-lg font-semibold tabular-nums text-green-700">
+                <p class="text-lg font-semibold text-green-700 tabular-nums">
                     {{ ringkas.terbayar }}
                 </p>
             </div>
             <div class="dk-kartu dk-kartu-p">
                 <p class="dk-sub">Piutang (belum terbayar)</p>
-                <p class="text-lg font-semibold tabular-nums text-red-700">
+                <p class="text-lg font-semibold text-red-700 tabular-nums">
                     {{ ringkas.piutang }}
                 </p>
             </div>
             <div class="dk-kartu dk-kartu-p">
                 <p class="dk-sub">Tagihan lewat tempo</p>
-                <p class="text-lg font-semibold tabular-nums text-red-700">
+                <p class="text-lg font-semibold text-red-700 tabular-nums">
                     {{ ringkas.lewat }}
                 </p>
             </div>
@@ -183,7 +187,10 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 >
                             </td>
                             <td>
-                                <Badge :teks="t.label_state" :warna="t.warna_state" />
+                                <Badge
+                                    :teks="t.label_state"
+                                    :warna="t.warna_state"
+                                />
                                 <span
                                     v-if="t.hari_lewat"
                                     class="dk-sub ml-1 text-[11px] text-red-600"
@@ -191,14 +198,25 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 >
                             </td>
                             <td>
-                                <span :class="t.state === 'lewat' ? 'text-red-600' : ''">{{
-                                    t.tgl_teks || '—'
-                                }}</span>
+                                <span
+                                    :class="
+                                        t.state === 'lewat'
+                                            ? 'text-red-600'
+                                            : ''
+                                    "
+                                    >{{ t.tgl_teks || '—' }}</span
+                                >
                             </td>
-                            <td class="text-right tabular-nums">{{ t.total_teks }}</td>
+                            <td class="text-right tabular-nums">
+                                {{ t.total_teks }}
+                            </td>
                             <td
                                 class="text-right font-medium tabular-nums"
-                                :class="t.sisa > 0 ? 'text-red-700' : 'text-green-700'"
+                                :class="
+                                    t.sisa > 0
+                                        ? 'text-red-700'
+                                        : 'text-green-700'
+                                "
                             >
                                 {{ t.sisa_teks }}
                             </td>
@@ -217,7 +235,9 @@ const ada = computed(() => props.daftar.data.length > 0);
                                     >Ubah</Link
                                 >
                                 <button
-                                    v-if="t.status !== 'batal' && t.terbayar === 0"
+                                    v-if="
+                                        t.status !== 'batal' && t.terbayar === 0
+                                    "
                                     type="button"
                                     class="dk-tbl dk-tbl-halus text-red-600"
                                     @click="batalkan(t)"
@@ -255,11 +275,13 @@ const ada = computed(() => props.daftar.data.length > 0);
                     </div>
                     <div>
                         <p class="dk-label">Terbayar</p>
-                        <p class="tabular-nums">{{ bayarUntuk.terbayar_teks }}</p>
+                        <p class="tabular-nums">
+                            {{ bayarUntuk.terbayar_teks }}
+                        </p>
                     </div>
                     <div>
                         <p class="dk-label">Sisa</p>
-                        <p class="font-medium tabular-nums text-red-700">
+                        <p class="font-medium text-red-700 tabular-nums">
                             {{ bayarUntuk.sisa_teks }}
                         </p>
                     </div>
@@ -277,7 +299,9 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 <p class="tabular-nums">{{ b.nominal_teks }}</p>
                                 <p class="dk-sub">
                                     {{ b.tgl_teks }} · {{ b.label_metode }}
-                                    <span v-if="b.referensi">· {{ b.referensi }}</span>
+                                    <span v-if="b.referensi"
+                                        >· {{ b.referensi }}</span
+                                    >
                                 </p>
                             </div>
                             <button
@@ -300,7 +324,9 @@ const ada = computed(() => props.daftar.data.length > 0);
                     <div class="grid gap-3 sm:grid-cols-2">
                         <label class="block">
                             <span class="dk-label"
-                                >Nominal<span class="text-red-500"> *</span></span
+                                >Nominal<span class="text-red-500">
+                                    *</span
+                                ></span
                             >
                             <input
                                 v-model="formB.nominal"
@@ -309,18 +335,28 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 step="1000"
                                 class="dk-isian"
                             />
-                            <span v-if="formB.errors.nominal" class="dk-galat">{{
-                                formB.errors.nominal
-                            }}</span>
+                            <span
+                                v-if="formB.errors.nominal"
+                                class="dk-galat"
+                                >{{ formB.errors.nominal }}</span
+                            >
                         </label>
                         <label class="block">
                             <span class="dk-label">Tanggal</span>
-                            <input v-model="formB.tgl" type="date" class="dk-isian" />
+                            <input
+                                v-model="formB.tgl"
+                                type="date"
+                                class="dk-isian"
+                            />
                         </label>
                         <label class="block">
                             <span class="dk-label">Metode</span>
                             <select v-model="formB.metode" class="dk-isian">
-                                <option v-for="(v, k) in opsi.metode" :key="k" :value="k">
+                                <option
+                                    v-for="(v, k) in opsi.metode"
+                                    :key="k"
+                                    :value="k"
+                                >
                                     {{ v }}
                                 </option>
                             </select>
@@ -351,7 +387,10 @@ const ada = computed(() => props.daftar.data.length > 0);
                         </button>
                     </div>
                 </form>
-                <div v-else class="flex justify-end border-t border-gray-100 pt-3">
+                <div
+                    v-else
+                    class="flex justify-end border-t border-gray-100 pt-3"
+                >
                     <button
                         type="button"
                         class="dk-tbl dk-tbl-kosong"

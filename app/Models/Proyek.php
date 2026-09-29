@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Str;
 
 class Proyek extends Model
 {
@@ -211,11 +210,11 @@ class Proyek extends Model
     public static function kodeBaru(int $tahun): string
     {
         $prefix = "DK-{$tahun}-";
-        $kode = static::query()->where('kode', 'like', $prefix . '%')
+        $kode = static::query()->where('kode', 'like', $prefix.'%')
             ->orderByDesc('kode')->value('kode');
 
         $urut = $kode ? ((int) substr($kode, strlen($prefix))) + 1 : 1;
 
-        return $prefix . str_pad((string) $urut, 3, '0', STR_PAD_LEFT);
+        return $prefix.str_pad((string) $urut, 3, '0', STR_PAD_LEFT);
     }
 }

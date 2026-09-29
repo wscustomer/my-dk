@@ -115,7 +115,9 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
             sub="Pembuatan website & aplikasi"
         >
             <template #aksi>
-                <a :href="rute.proyekUnduh" class="dk-tbl dk-tbl-kosong">↓ CSV</a>
+                <a :href="rute.proyekUnduh" class="dk-tbl dk-tbl-kosong"
+                    >↓ CSV</a
+                >
                 <button
                     type="button"
                     class="dk-tbl dk-tbl-kosong"
@@ -176,7 +178,9 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
                     <span class="text-xs font-semibold text-gray-700">{{
                         k.label
                     }}</span>
-                    <span class="dk-sub">{{ papanData[k.kunci]?.length || 0 }}</span>
+                    <span class="dk-sub">{{
+                        papanData[k.kunci]?.length || 0
+                    }}</span>
                 </header>
                 <div class="space-y-2 p-2">
                     <div
@@ -198,7 +202,9 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
                                 <span :style="{ width: p.persen + '%' }" />
                             </div>
                             <span class="dk-sub tabular-nums"
-                                >{{ p.tahapan_selesai }}/{{ p.tahapan_jumlah }}</span
+                                >{{ p.tahapan_selesai }}/{{
+                                    p.tahapan_jumlah
+                                }}</span
                             >
                         </div>
                         <p v-if="p.tgl_target_teks" class="dk-sub mt-1">
@@ -207,7 +213,10 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
                             }}</span>
                         </p>
                     </div>
-                    <p v-if="!papanData[k.kunci]?.length" class="dk-sub py-3 text-center">
+                    <p
+                        v-if="!papanData[k.kunci]?.length"
+                        class="dk-sub py-3 text-center"
+                    >
                         kosong
                     </p>
                 </div>
@@ -238,7 +247,8 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
                                         >{{ p.nama }}</Link
                                     >
                                     <span class="dk-sub block"
-                                        >{{ p.kode }} · {{ p.label_jenis }}</span
+                                        >{{ p.kode }} ·
+                                        {{ p.label_jenis }}</span
                                     >
                                 </td>
                                 <td>
@@ -249,23 +259,37 @@ const ada = computed(() => (props.daftar as any[]).length > 0);
                                     >
                                 </td>
                                 <td>
-                                    <Badge :teks="p.label_status" warna="#6b7280" />
+                                    <Badge
+                                        :teks="p.label_status"
+                                        warna="#6b7280"
+                                    />
                                 </td>
                                 <td class="min-w-[8rem]">
                                     <div class="flex items-center gap-2">
                                         <div class="dk-progress flex-1">
-                                            <span :style="{ width: p.persen + '%' }" />
+                                            <span
+                                                :style="{
+                                                    width: p.persen + '%',
+                                                }"
+                                            />
                                         </div>
                                         <span class="dk-sub tabular-nums"
                                             >{{ p.persen }}%</span
                                         >
                                     </div>
-                                    <span class="dk-sub">{{ p.tahap || '—' }}</span>
+                                    <span class="dk-sub">{{
+                                        p.tahap || '—'
+                                    }}</span>
                                 </td>
                                 <td>
-                                    <span :class="p.telat ? 'text-red-600 font-medium' : ''">{{
-                                        p.tgl_target_teks || '—'
-                                    }}</span>
+                                    <span
+                                        :class="
+                                            p.telat
+                                                ? 'font-medium text-red-600'
+                                                : ''
+                                        "
+                                        >{{ p.tgl_target_teks || '—' }}</span
+                                    >
                                 </td>
                                 <td class="text-right tabular-nums">
                                     {{ p.nilai_teks }}

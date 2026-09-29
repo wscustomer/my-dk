@@ -37,7 +37,7 @@ class TagihanController extends Controller
                 ->whereRaw('total > (select coalesce(sum(nominal),0) from tagihan_bayar where tagihan_bayar.tagihan_id = tagihan.id)'))
             ->when($status === 'piutang', fn ($qb) => $qb->whereIn('status', ['terkirim'])
                 ->whereRaw('total > (select coalesce(sum(nominal),0) from tagihan_bayar where tagihan_bayar.tagihan_id = tagihan.id)'))
-            ->orderByRaw($urutan === 'nilai' ? "total desc" : "tgl_jatuh_tempo is null, tgl_jatuh_tempo asc")
+            ->orderByRaw($urutan === 'nilai' ? 'total desc' : 'tgl_jatuh_tempo is null, tgl_jatuh_tempo asc')
             ->paginate(25)->withQueryString();
 
         $semua = Tagihan::query()->where('status', '!=', 'batal')->with('pembayaran')->get();
@@ -97,7 +97,7 @@ class TagihanController extends Controller
         $data = $this->validasi($request);
 
         if ((float) $data['total'] < $tagihan->terbayar) {
-            return back()->with('galat', 'Total lebih kecil dari yang sudah dibayar (' . $tagihan->terbayar_teks . ').');
+            return back()->with('galat', 'Total lebih kecil dari yang sudah dibayar ('.$tagihan->terbayar_teks.').');
         }
 
         $tagihan->update($data);
@@ -117,7 +117,7 @@ class TagihanController extends Controller
 
         $sisa = $tagihan->sisa;
         if ((float) $data['nominal'] > $sisa + 0.001) {
-            return back()->with('galat', 'Nominal melebihi sisa tagihan (' . Uang::format($sisa) . ').');
+            return back()->with('galat', 'Nominal melebihi sisa tagihan ('.Uang::format($sisa).').');
         }
 
         DB::transaction(function () use ($tagihan, $data, $request) {
@@ -175,7 +175,7 @@ class TagihanController extends Controller
                 ]);
             }
             fclose($out);
-        }, 'tagihan-' . now()->format('Ymd') . '.csv', ['Content-Type' => 'text/csv']);
+        }, 'tagihan-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv']);
     }
 
     private function opsi(): array

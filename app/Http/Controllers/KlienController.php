@@ -355,7 +355,7 @@ class KlienController extends Controller
                 ]);
             }
             fclose($out);
-        }, 'klien-' . now()->format('Ymd') . '.csv', ['Content-Type' => 'text/csv']);
+        }, 'klien-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv']);
     }
 
     private function validasi(Request $request, ?Klien $klien = null): array

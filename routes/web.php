@@ -19,7 +19,7 @@ Route::post('/keluar', [AuthController::class, 'keluar'])->name('keluar');
 Route::get('/p/{token}', [PortalController::class, 'lihat'])
     ->middleware('throttle:60,1')->name('portal.lihat');
 
-Route::middleware('auth', 'peran')->group(function () {
+Route::middleware(['auth', 'peran'])->group(function () {
     Route::get('/', [DasborController::class, 'index'])->name('dasbor');
     Route::get('/dasbor/data', DasborDataController::class)->name('dasbor.data');
 

@@ -66,7 +66,11 @@ const inisial = computed(() => {
                     <Link
                         v-for="m in menu"
                         :key="m.rute"
-                        :href="m.rute === 'dasbor' ? '/' : '/' + m.cocok.replace('*', '')"
+                        :href="
+                            m.rute === 'dasbor'
+                                ? '/'
+                                : '/' + m.cocok.replace('*', '')
+                        "
                         class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition"
                         :class="
                             aktif(m.cocok)
@@ -74,7 +78,9 @@ const inisial = computed(() => {
                                 : 'text-gray-600 hover:bg-gray-50'
                         "
                     >
-                        <span class="w-4 text-center opacity-70">{{ m.ikon }}</span>
+                        <span class="w-4 text-center opacity-70">{{
+                            m.ikon
+                        }}</span>
                         {{ m.label }}
                     </Link>
                 </nav>
@@ -86,7 +92,9 @@ const inisial = computed(() => {
                             >{{ inisial }}</span
                         >
                         <div class="min-w-0 flex-1">
-                            <p class="truncate text-xs font-medium text-gray-800">
+                            <p
+                                class="truncate text-xs font-medium text-gray-800"
+                            >
                                 {{ pengguna?.name }}
                             </p>
                             <p class="truncate text-[11px] text-gray-500">
@@ -135,12 +143,14 @@ const inisial = computed(() => {
                     <Link
                         v-for="m in menu"
                         :key="m.rute"
-                        :href="m.rute === 'dasbor' ? '/' : '/' + m.cocok.replace('*', '')"
+                        :href="
+                            m.rute === 'dasbor'
+                                ? '/'
+                                : '/' + m.cocok.replace('*', '')
+                        "
                         class="dk-tbl"
                         :class="
-                            aktif(m.cocok)
-                                ? 'dk-tbl-utama'
-                                : 'dk-tbl-kosong'
+                            aktif(m.cocok) ? 'dk-tbl-utama' : 'dk-tbl-kosong'
                         "
                         @click="terbuka = false"
                         >{{ m.label }}</Link
@@ -148,10 +158,7 @@ const inisial = computed(() => {
                 </nav>
 
                 <!-- Pesan -->
-                <div
-                    v-if="flash.ok || flash.galat"
-                    class="px-4 pt-4 sm:px-6"
-                >
+                <div v-if="flash.ok || flash.galat" class="px-4 pt-4 sm:px-6">
                     <div
                         class="dk-tutup flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm"
                         :class="

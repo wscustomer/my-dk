@@ -67,17 +67,23 @@ function simpan() {
                 <tbody>
                     <tr v-for="u in daftar" :key="u.id">
                         <td>
-                            <span class="font-medium text-gray-900">{{ u.name }}</span>
+                            <span class="font-medium text-gray-900">{{
+                                u.name
+                            }}</span>
                         </td>
                         <td class="text-gray-600">{{ u.email }}</td>
                         <td>
                             <Badge
                                 :teks="u.label_peran"
-                                :warna="u.peran === 'admin' ? '#2563eb' : '#6b7280'"
+                                :warna="
+                                    u.peran === 'admin' ? '#2563eb' : '#6b7280'
+                                "
                             />
                         </td>
                         <td>
-                            <span v-if="u.aktif" class="text-green-700">aktif</span>
+                            <span v-if="u.aktif" class="text-green-700"
+                                >aktif</span
+                            >
                             <span v-else class="text-gray-400">nonaktif</span>
                         </td>
                         <td class="dk-sub">{{ u.dibuat }}</td>
@@ -93,17 +99,26 @@ function simpan() {
             </table>
         </div>
 
-        <Modal :buka="modal" judul="Pengguna baru" lebar="sm" @tutup="modal = false">
+        <Modal
+            :buka="modal"
+            judul="Pengguna baru"
+            lebar="sm"
+            @tutup="modal = false"
+        >
             <form class="space-y-3" @submit.prevent="simpan">
                 <label class="block">
-                    <span class="dk-label">Nama<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nama<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="form.name" class="dk-isian" autofocus />
                     <span v-if="form.errors.name" class="dk-galat">{{
                         form.errors.name
                     }}</span>
                 </label>
                 <label class="block">
-                    <span class="dk-label">Email<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Email<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="form.email" type="email" class="dk-isian" />
                     <span v-if="form.errors.email" class="dk-galat">{{
                         form.errors.email
@@ -113,8 +128,14 @@ function simpan() {
                     <span class="dk-label"
                         >Kata sandi<span class="text-red-500"> *</span></span
                     >
-                    <input v-model="form.password" type="password" class="dk-isian" />
-                    <span class="mt-1 block text-xs text-gray-400">Minimal 10 karakter.</span>
+                    <input
+                        v-model="form.password"
+                        type="password"
+                        class="dk-isian"
+                    />
+                    <span class="mt-1 block text-xs text-gray-400"
+                        >Minimal 10 karakter.</span
+                    >
                     <span v-if="form.errors.password" class="dk-galat">{{
                         form.errors.password
                     }}</span>
@@ -122,7 +143,9 @@ function simpan() {
                 <label class="block">
                     <span class="dk-label">Peran</span>
                     <select v-model="form.peran" class="dk-isian">
-                        <option v-for="(v, k) in peran" :key="k" :value="k">{{ v }}</option>
+                        <option v-for="(v, k) in peran" :key="k" :value="k">
+                            {{ v }}
+                        </option>
                     </select>
                 </label>
                 <div class="flex justify-end gap-2 pt-1">

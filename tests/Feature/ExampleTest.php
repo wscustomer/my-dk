@@ -1,7 +1,9 @@
 <?php
 
-test('returns a successful response', function () {
-    $response = $this->get(route('home'));
+test('tamu diarahkan ke halaman masuk', function () {
+    $this->get('/')->assertRedirect('/masuk');
+});
 
-    $response->assertOk();
+test('halaman masuk tampil', function () {
+    $this->get('/masuk')->assertOk();
 });

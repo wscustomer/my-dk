@@ -10,13 +10,13 @@ layanan pendampingnya (domain, hosting, maintenance).
 
 ## 0. Keputusan yang dikunci di depan
 
-| Topik | Keputusan | Alasan |
-|---|---|---|
-| Aplikasi baru, bukan modul lama | Repo `my-dk` berdiri sendiri di `my.digitalkonsultan.com` | Marketing Tools (`app.digitalkonsultan.com`) tetap fokus marketing; CRM punya siklus rilis sendiri |
-| Peran aplikasi | **Pengendali operasional & proyek.** Yang mencatat siapa klien, apa yang dijanjikan, di tahap apa, kapan ditagih, apa yang rusak | WSCRM (`app.websweetstudio.com`) tetap **sumber kebenaran penagihan** (hosting, domain, invoice, renewal) |
-| Login | Tabel `users` milik app ini, guard `web` standar, register dimatikan | Sudah terpasang di starter kit; tidak perlu SSO untuk 2–3 pengguna |
-| Stack tampilan | Inertia + Vue + Tailwind (bukan Blade) | Sudah jadi bentuk repo; satu bahasa UI untuk semua halaman |
-| Bahasa | Antarmuka **Indonesia**, tanpa penyingkatan jargon (Proyek, Tahapan, Tagihan, Klien) | Konvensi user |
+| Topik                           | Keputusan                                                                                                                        | Alasan                                                                                                    |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Aplikasi baru, bukan modul lama | Repo `my-dk` berdiri sendiri di `my.digitalkonsultan.com`                                                                        | Marketing Tools (`app.digitalkonsultan.com`) tetap fokus marketing; CRM punya siklus rilis sendiri        |
+| Peran aplikasi                  | **Pengendali operasional & proyek.** Yang mencatat siapa klien, apa yang dijanjikan, di tahap apa, kapan ditagih, apa yang rusak | WSCRM (`app.websweetstudio.com`) tetap **sumber kebenaran penagihan** (hosting, domain, invoice, renewal) |
+| Login                           | Tabel `users` milik app ini, guard `web` standar, register dimatikan                                                             | Sudah terpasang di starter kit; tidak perlu SSO untuk 2–3 pengguna                                        |
+| Stack tampilan                  | Inertia + Vue + Tailwind (bukan Blade)                                                                                           | Sudah jadi bentuk repo; satu bahasa UI untuk semua halaman                                                |
+| Bahasa                          | Antarmuka **Indonesia**, tanpa penyingkatan jargon (Proyek, Tahapan, Tagihan, Klien)                                             | Konvensi user                                                                                             |
 
 > **Aturan anti-duplikasi (paling penting).** Aplikasi ini **tidak** menyimpan harga domain,
 > katalog hosting, invoice, atau status renewal. Itu semua milik WSCRM. Kalau CRM butuh menampilkan
@@ -48,11 +48,11 @@ untuk melihat "sampai mana pekerjaan klien ini" atau "siapa yang menunggak DP".
 
 ## 2. Pengguna & peran
 
-| Peran | Siapa | Boleh |
-|---|---|---|
-| `admin` | Pemilik (user) | Semua: klien, proyek, tagihan, pengaturan, pengguna, tarif |
-| `staf` | Pekerja/developer | Lihat semua klien & proyek; catat aktivitas, ubah tahap proyek, ajukan tagihan (**tidak** bisa hapus, **tidak** bisa ubah tarif & pengguna) |
-| `klien` | Pelanggan (nanti, fase 5) | Hanya proyeknya sendiri, read-only: tahap, tenggat, riwayat, komentar |
+| Peran   | Siapa                     | Boleh                                                                                                                                       |
+| ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `admin` | Pemilik (user)            | Semua: klien, proyek, tagihan, pengaturan, pengguna, tarif                                                                                  |
+| `staf`  | Pekerja/developer         | Lihat semua klien & proyek; catat aktivitas, ubah tahap proyek, ajukan tagihan (**tidak** bisa hapus, **tidak** bisa ubah tarif & pengguna) |
+| `klien` | Pelanggan (nanti, fase 5) | Hanya proyeknya sendiri, read-only: tahap, tenggat, riwayat, komentar                                                                       |
 
 Registrasi mandiri **dimatikan**. Akun dibuat admin lewat menu Pengguna.
 
@@ -129,189 +129,190 @@ Layanan **maintenance**: tidak memakai tahapan, cukup periode + jadwal kunjungan
 
 ### 4.2 **Tidak** termasuk (sengaja)
 
-| Tidak dibuat | Kenapa |
-|---|---|
-| Invoice legal + PDF bernomor + faktur pajak | Sudah ada di WSCRM, jangan diduplikasi |
-| Harga domain & katalog hosting | Milik WSCRM (`domain_prices`, `hosting_plans`) |
-| Pembayaran online / payment gateway | Tidak diminta; transfer manual sudah jalan |
-| Tiket dukungan bergaya helpdesk | Aktivitas proyek sudah cukup untuk skala ini |
-| Chat internal / notifikasi push ke ponsel | WhatsApp sudah dipakai; cukup tautan WA yang sudah ada |
-| Multi-mata uang, multi-cabang | Satu usaha, rupiah |
-| Pelacakan waktu per menit (time tracking) | Tidak dipakai untuk menagih |
+| Tidak dibuat                                | Kenapa                                                 |
+| ------------------------------------------- | ------------------------------------------------------ |
+| Invoice legal + PDF bernomor + faktur pajak | Sudah ada di WSCRM, jangan diduplikasi                 |
+| Harga domain & katalog hosting              | Milik WSCRM (`domain_prices`, `hosting_plans`)         |
+| Pembayaran online / payment gateway         | Tidak diminta; transfer manual sudah jalan             |
+| Tiket dukungan bergaya helpdesk             | Aktivitas proyek sudah cukup untuk skala ini           |
+| Chat internal / notifikasi push ke ponsel   | WhatsApp sudah dipakai; cukup tautan WA yang sudah ada |
+| Multi-mata uang, multi-cabang               | Satu usaha, rupiah                                     |
+| Pelacakan waktu per menit (time tracking)   | Tidak dipakai untuk menagih                            |
 
 ---
 
 ## 5. Spesifikasi data
 
 Konvensi: tabel `snake_case` jamak, PK `id` bigIncrements, `timestamps`, status sebagai `varchar`
-+ konstanta PHP (pola yang sama dipakai `customers`/`customer_services` di app lama — enologi MySQL
-yang berubah menyulitkan migrasi).
+
+- konstanta PHP (pola yang sama dipakai `customers`/`customer_services` di app lama — enologi MySQL
+  yang berubah menyulitkan migrasi).
 
 **Aturan wajib: seluruh perubahan skema lewat migrasi.** Tidak ada `ALTER` manual.
 
 ### 5.1 `users` (sudah ada — diperluas)
 
-| Kolom | Tipe | Catatan |
-|---|---|---|
-| id | bigint PK | |
-| name | varchar(100) | |
-| email | varchar(150) UNIQUE | |
-| password | varchar(255) | |
-| peran | varchar(20) | `admin` \| `staf`, default `staf` |
-| aktif | boolean | default true; nonaktif tidak bisa login |
+| Kolom    | Tipe                | Catatan                                 |
+| -------- | ------------------- | --------------------------------------- |
+| id       | bigint PK           |                                         |
+| name     | varchar(100)        |                                         |
+| email    | varchar(150) UNIQUE |                                         |
+| password | varchar(255)        |                                         |
+| peran    | varchar(20)         | `admin` \| `staf`, default `staf`       |
+| aktif    | boolean             | default true; nonaktif tidak bisa login |
 
 ### 5.2 `klien`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| nama | varchar(150) | no | orang/institusi penanggung jawab |
-| usaha | varchar(150) | yes | nama usaha/brand |
-| tipe | varchar(20) | no | `perusahaan` \| `umkm` \| `perorangan` \| `instansi` |
-| telp | varchar(30) | yes | nomor kantor bukan WA (jangan dibuat tautan WA) |
-| wa | varchar(20) | yes | format 62…; tombol WA hanya kalau ini terisi |
-| email | varchar(150) | yes | |
-| alamat | varchar(255) | yes | |
-| wilayah | varchar(80) | yes | kabupaten/kota |
-| sumber | varchar(30) | no | `prospek` \| `referral` \| `manual` \| `lama` |
-| ref_asal | varchar(100) | yes | siapa yang mereferensikan |
-| prospek_id | bigint | yes | penaut ke `prospects.id` (lintas app, tanpa FK) |
-| status | varchar(20) | no | `prospek` \| `klien_aktif` \| `tidak_aktif` \| `pelanggan_lama` |
-| sejak | date | yes | tanggal jadi klien |
-| catatan | text | yes | |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe         | Null | Catatan                                                         |
+| ---------------------- | ------------ | ---- | --------------------------------------------------------------- |
+| id                     | bigint PK    | no   |                                                                 |
+| nama                   | varchar(150) | no   | orang/institusi penanggung jawab                                |
+| usaha                  | varchar(150) | yes  | nama usaha/brand                                                |
+| tipe                   | varchar(20)  | no   | `perusahaan` \| `umkm` \| `perorangan` \| `instansi`            |
+| telp                   | varchar(30)  | yes  | nomor kantor bukan WA (jangan dibuat tautan WA)                 |
+| wa                     | varchar(20)  | yes  | format 62…; tombol WA hanya kalau ini terisi                    |
+| email                  | varchar(150) | yes  |                                                                 |
+| alamat                 | varchar(255) | yes  |                                                                 |
+| wilayah                | varchar(80)  | yes  | kabupaten/kota                                                  |
+| sumber                 | varchar(30)  | no   | `prospek` \| `referral` \| `manual` \| `lama`                   |
+| ref_asal               | varchar(100) | yes  | siapa yang mereferensikan                                       |
+| prospek_id             | bigint       | yes  | penaut ke `prospects.id` (lintas app, tanpa FK)                 |
+| status                 | varchar(20)  | no   | `prospek` \| `klien_aktif` \| `tidak_aktif` \| `pelanggan_lama` |
+| sejak                  | date         | yes  | tanggal jadi klien                                              |
+| catatan                | text         | yes  |                                                                 |
+| created_at, updated_at | timestamp    | yes  |                                                                 |
 
 Index: `status`, `nama`, `prospek_id`.
 
 ### 5.3 `proyek`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| klien_id | bigint | no | FK → `klien.id`, `cascadeOnDelete` |
-| kode | varchar(30) | no | UNIQUE, format `DK-YYYY-NNN` (mis. `DK-2026-014`) |
-| nama | varchar(150) | no | |
-| jenis | varchar(20) | no | `website` \| `aplikasi` \| `maintenance` \| `lain` |
-| deskripsi | text | yes | ringkas; detail di `brief` |
-| brief | longtext | yes | kebutuhan dari klien |
-| nilai_kontrak | decimal(14,2) | no | default 0 |
-| status | varchar(20) | no | lihat §3.2 |
-| prioritas | varchar(10) | no | `rendah` \| `normal` \| `tinggi`, default `normal` |
-| penanggung_jawab | bigint | yes | FK → `users.id`, `nullOnDelete` |
-| mulai_at | date | yes | |
-| tenggat_at | date | yes | janji ke klien |
-| selesai_at | date | yes | |
-| ditahan_alasan | varchar(255) | yes | wajib bila status `ditahan` |
-| domain | varchar(150) | yes | domain utama hasil pekerjaan |
-| repo | varchar(200) | yes | tautan git (bila aplikasi) |
-| staging_url | varchar(200) | yes | |
-| produksi_url | varchar(200) | yes | |
-| wscrm_order_id | bigint | yes | tautan order di WSCRM (tanpa FK) |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe          | Null | Catatan                                            |
+| ---------------------- | ------------- | ---- | -------------------------------------------------- |
+| id                     | bigint PK     | no   |                                                    |
+| klien_id               | bigint        | no   | FK → `klien.id`, `cascadeOnDelete`                 |
+| kode                   | varchar(30)   | no   | UNIQUE, format `DK-YYYY-NNN` (mis. `DK-2026-014`)  |
+| nama                   | varchar(150)  | no   |                                                    |
+| jenis                  | varchar(20)   | no   | `website` \| `aplikasi` \| `maintenance` \| `lain` |
+| deskripsi              | text          | yes  | ringkas; detail di `brief`                         |
+| brief                  | longtext      | yes  | kebutuhan dari klien                               |
+| nilai_kontrak          | decimal(14,2) | no   | default 0                                          |
+| status                 | varchar(20)   | no   | lihat §3.2                                         |
+| prioritas              | varchar(10)   | no   | `rendah` \| `normal` \| `tinggi`, default `normal` |
+| penanggung_jawab       | bigint        | yes  | FK → `users.id`, `nullOnDelete`                    |
+| mulai_at               | date          | yes  |                                                    |
+| tenggat_at             | date          | yes  | janji ke klien                                     |
+| selesai_at             | date          | yes  |                                                    |
+| ditahan_alasan         | varchar(255)  | yes  | wajib bila status `ditahan`                        |
+| domain                 | varchar(150)  | yes  | domain utama hasil pekerjaan                       |
+| repo                   | varchar(200)  | yes  | tautan git (bila aplikasi)                         |
+| staging_url            | varchar(200)  | yes  |                                                    |
+| produksi_url           | varchar(200)  | yes  |                                                    |
+| wscrm_order_id         | bigint        | yes  | tautan order di WSCRM (tanpa FK)                   |
+| created_at, updated_at | timestamp     | yes  |                                                    |
 
 Index: `klien_id`, `status`, `tenggat_at`, UNIQUE `kode`.
 
 ### 5.4 `proyek_tahapan`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| proyek_id | bigint | no | FK → `proyek.id`, cascade |
-| urutan | smallint | no | 1..n |
-| nama | varchar(100) | no | dari template |
-| status | varchar(20) | no | `belum` \| `berjalan` \| `selesai` \| `dilewati` |
-| mulai_at | date | yes | |
-| tenggat_at | date | yes | |
-| selesai_at | date | yes | |
-| siapa | bigint | yes | FK → `users.id` |
-| catatan | varchar(500) | yes | |
+| Kolom      | Tipe         | Null | Catatan                                          |
+| ---------- | ------------ | ---- | ------------------------------------------------ |
+| id         | bigint PK    | no   |                                                  |
+| proyek_id  | bigint       | no   | FK → `proyek.id`, cascade                        |
+| urutan     | smallint     | no   | 1..n                                             |
+| nama       | varchar(100) | no   | dari template                                    |
+| status     | varchar(20)  | no   | `belum` \| `berjalan` \| `selesai` \| `dilewati` |
+| mulai_at   | date         | yes  |                                                  |
+| tenggat_at | date         | yes  |                                                  |
+| selesai_at | date         | yes  |                                                  |
+| siapa      | bigint       | yes  | FK → `users.id`                                  |
+| catatan    | varchar(500) | yes  |                                                  |
 
 Index: (`proyek_id`, `urutan`) UNIQUE.
 
 ### 5.5 `aktivitas` (linimasa semua entitas)
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| jenis_entitas | varchar(20) | no | `klien` \| `proyek` \| `tahapan` \| `tagihan` |
-| entitas_id | bigint | no | |
-| tipe | varchar(30) | no | `catatan`, `panggilan`, `wa`, `email`, `telepon`, `pertemuan`, `mengubah_status`, `unggah` |
-| judul | varchar(150) | yes | |
-| isi | text | yes | |
-| user_id | bigint | yes | pelaku |
-| pada | datetime | no | default now |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe         | Null | Catatan                                                                                    |
+| ---------------------- | ------------ | ---- | ------------------------------------------------------------------------------------------ |
+| id                     | bigint PK    | no   |                                                                                            |
+| jenis_entitas          | varchar(20)  | no   | `klien` \| `proyek` \| `tahapan` \| `tagihan`                                              |
+| entitas_id             | bigint       | no   |                                                                                            |
+| tipe                   | varchar(30)  | no   | `catatan`, `panggilan`, `wa`, `email`, `telepon`, `pertemuan`, `mengubah_status`, `unggah` |
+| judul                  | varchar(150) | yes  |                                                                                            |
+| isi                    | text         | yes  |                                                                                            |
+| user_id                | bigint       | yes  | pelaku                                                                                     |
+| pada                   | datetime     | no   | default now                                                                                |
+| created_at, updated_at | timestamp    | yes  |                                                                                            |
 
 Index: (`jenis_entitas`, `entitas_id`, `pada`).
 
 ### 5.6 `tagihan` (catatan operasional, **bukan** invoice pajak)
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| proyek_id | bigint | yes | FK → `proyek.id`, cascade; null = tagihan non-proyek |
-| klien_id | bigint | no | FK → `klien.id`, cascade |
-| jenis | varchar(20) | no | `dp` \| `pelunasan` \| `termin` \| `bulanan` \| `tambahan` |
-| termin_ke | tinyint | yes | urutan termin |
-| uraian | varchar(200) | no | |
-| nominal | decimal(14,2) | no | |
-| jatuh_tempo | date | no | |
-| status | varchar(20) | no | `belum` \| `sebagian` \| `lunas` \| `batal` |
-| dibayar_total | decimal(14,2) | no | default 0, dihitung dari `tagihan_bayar` |
-| metode | varchar(20) | yes | `transfer` \| `tunai` \| `lain` |
-| wscrm_invoice_id | bigint | yes | tautan invoice WSCRM (tanpa FK) |
-| catatan | text | yes | |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe          | Null | Catatan                                                    |
+| ---------------------- | ------------- | ---- | ---------------------------------------------------------- |
+| id                     | bigint PK     | no   |                                                            |
+| proyek_id              | bigint        | yes  | FK → `proyek.id`, cascade; null = tagihan non-proyek       |
+| klien_id               | bigint        | no   | FK → `klien.id`, cascade                                   |
+| jenis                  | varchar(20)   | no   | `dp` \| `pelunasan` \| `termin` \| `bulanan` \| `tambahan` |
+| termin_ke              | tinyint       | yes  | urutan termin                                              |
+| uraian                 | varchar(200)  | no   |                                                            |
+| nominal                | decimal(14,2) | no   |                                                            |
+| jatuh_tempo            | date          | no   |                                                            |
+| status                 | varchar(20)   | no   | `belum` \| `sebagian` \| `lunas` \| `batal`                |
+| dibayar_total          | decimal(14,2) | no   | default 0, dihitung dari `tagihan_bayar`                   |
+| metode                 | varchar(20)   | yes  | `transfer` \| `tunai` \| `lain`                            |
+| wscrm_invoice_id       | bigint        | yes  | tautan invoice WSCRM (tanpa FK)                            |
+| catatan                | text          | yes  |                                                            |
+| created_at, updated_at | timestamp     | yes  |                                                            |
 
 Index: `klien_id`, `proyek_id`, `status`, `jatuh_tempo`.
 
 ### 5.7 `tagihan_bayar`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| tagihan_id | bigint | no | FK → `tagihan.id`, cascade |
-| tanggal | date | no | |
-| nominal | decimal(14,2) | no | |
-| metode | varchar(20) | no | |
-| bukti_path | varchar(255) | yes | path relatif di `storage/app/public/bukti/` |
-| catatan | varchar(255) | yes | |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe          | Null | Catatan                                     |
+| ---------------------- | ------------- | ---- | ------------------------------------------- |
+| id                     | bigint PK     | no   |                                             |
+| tagihan_id             | bigint        | no   | FK → `tagihan.id`, cascade                  |
+| tanggal                | date          | no   |                                             |
+| nominal                | decimal(14,2) | no   |                                             |
+| metode                 | varchar(20)   | no   |                                             |
+| bukti_path             | varchar(255)  | yes  | path relatif di `storage/app/public/bukti/` |
+| catatan                | varchar(255)  | yes  |                                             |
+| created_at, updated_at | timestamp     | yes  |                                             |
 
 ### 5.8 `lampiran`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| entitas | varchar(20) | no | `klien` \| `proyek` \| `tagihan` |
-| entitas_id | bigint | no | |
-| nama_asli | varchar(200) | no | |
-| path | varchar(255) | no | `storage/app/public/lampiran/<entitas>/<id>/` |
-| ukuran | int unsigned | no | byte |
-| mime | varchar(100) | no | |
-| user_id | bigint | yes | pengunggah |
-| created_at, updated_at | timestamp | yes | |
+| Kolom                  | Tipe         | Null | Catatan                                       |
+| ---------------------- | ------------ | ---- | --------------------------------------------- |
+| id                     | bigint PK    | no   |                                               |
+| entitas                | varchar(20)  | no   | `klien` \| `proyek` \| `tagihan`              |
+| entitas_id             | bigint       | no   |                                               |
+| nama_asli              | varchar(200) | no   |                                               |
+| path                   | varchar(255) | no   | `storage/app/public/lampiran/<entitas>/<id>/` |
+| ukuran                 | int unsigned | no   | byte                                          |
+| mime                   | varchar(100) | no   |                                               |
+| user_id                | bigint       | yes  | pengunggah                                    |
+| created_at, updated_at | timestamp    | yes  |                                               |
 
 ### 5.9 `template_tahapan`
 
-| Kolom | Tipe | Null | Catatan |
-|---|---|---|---|
-| id | bigint PK | no | |
-| jenis | varchar(20) | no | `website` \| `aplikasi` \| `maintenance` \| `lain` |
-| urutan | smallint | no | |
-| nama | varchar(100) | no | |
-| aktif | boolean | no | default true |
+| Kolom  | Tipe         | Null | Catatan                                            |
+| ------ | ------------ | ---- | -------------------------------------------------- |
+| id     | bigint PK    | no   |                                                    |
+| jenis  | varchar(20)  | no   | `website` \| `aplikasi` \| `maintenance` \| `lain` |
+| urutan | smallint     | no   |                                                    |
+| nama   | varchar(100) | no   |                                                    |
+| aktif  | boolean      | no   | default true                                       |
 
 Diseeder dari §3.1. Dipakai saat proyek baru dibuat; sesudah itu proyek menyimpan salinannya sendiri
 (mengubah template tidak mengubah proyek yang sudah jalan).
 
 ### 5.10 `pengaturan` (key-value)
 
-| Kolom | Tipe | Catatan |
-|---|---|---|
-| kunci | varchar(60) PK | |
-| nilai | text | |
-| keterangan | varchar(200) | untuk layar pengaturan |
+| Kolom      | Tipe           | Catatan                |
+| ---------- | -------------- | ---------------------- |
+| kunci      | varchar(60) PK |                        |
+| nilai      | text           |                        |
+| keterangan | varchar(200)   | untuk layar pengaturan |
 
 Kunci awal: `nama_usaha`, `alamat_usaha`, `telp_usaha`, `email_usaha`, `bank_nama`, `bank_rekening`,
 `bank_atas_nama`, `dp_persen_default` (default 50), `termin_default` (default 3),
@@ -319,12 +320,12 @@ Kunci awal: `nama_usaha`, `alamat_usaha`, `telp_usaha`, `email_usaha`, `bank_nam
 
 ### 5.11 Di luar database
 
-| Hal | Keputusan |
-|---|---|
-| Soft delete | Tidak. Hapus = hapus, kecuali `klien` yang ditolak bila masih punya proyek aktif (`restrict`). Butuh arsip → pakai status, bukan `deleted_at`. |
-| Riwayat perubahan kolom | Tidak ada tabel auditori. Yang penting (ubah status, ubah nominal) ditulis ke `aktivitas`. |
-| Nomor invoice | **Tidak dibuat di CRM.** Kalau nanti butuh, ambil dari WSCRM. |
-| Pencarian teks penuh | Fase 1 pakai `LIKE`. Bila lambat (>5.000 baris), baru pertimbangkan FULLTEXT. |
+| Hal                     | Keputusan                                                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Soft delete             | Tidak. Hapus = hapus, kecuali `klien` yang ditolak bila masih punya proyek aktif (`restrict`). Butuh arsip → pakai status, bukan `deleted_at`. |
+| Riwayat perubahan kolom | Tidak ada tabel auditori. Yang penting (ubah status, ubah nominal) ditulis ke `aktivitas`.                                                     |
+| Nomor invoice           | **Tidak dibuat di CRM.** Kalau nanti butuh, ambil dari WSCRM.                                                                                  |
+| Pencarian teks penuh    | Fase 1 pakai `LIKE`. Bila lambat (>5.000 baris), baru pertimbangkan FULLTEXT.                                                                  |
 
 ---
 
@@ -450,12 +451,12 @@ VM ini RAM 3,6 GB dan dipakai bersama Hermes, WSD Shield, mail, DNS, dan dua app
 
 ### 8.6 Integrasi
 
-| Sumber | Arah | Cara |
-|---|---|---|
-| WSCRM `/api/dk/*` | Masuk, baca saja | Token mesin di `.env` (`WSCRM_API_TOKEN`), filter klien lewat `DK_KLIEN_IDS`. Dipakai untuk menampilkan layanan aktif & invoice terkait. **Cache 1 jam** |
-| Marketing Tools `prospects` | Masuk sekali jalan | Impor manual "Jadikan Klien"; menyimpan `prospek_id`, tidak menyinkron terus-menerus |
-| WhatsApp | Keluar | Hanya `https://wa.me/62…` dengan teks terisi. Tidak ada API WhatsApp |
-| Email pengingat | Keluar | Fase 4. Mailer `log` dulu sampai user menyetujui pengiriman nyata |
+| Sumber                      | Arah               | Cara                                                                                                                                                     |
+| --------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| WSCRM `/api/dk/*`           | Masuk, baca saja   | Token mesin di `.env` (`WSCRM_API_TOKEN`), filter klien lewat `DK_KLIEN_IDS`. Dipakai untuk menampilkan layanan aktif & invoice terkait. **Cache 1 jam** |
+| Marketing Tools `prospects` | Masuk sekali jalan | Impor manual "Jadikan Klien"; menyimpan `prospek_id`, tidak menyinkron terus-menerus                                                                     |
+| WhatsApp                    | Keluar             | Hanya `https://wa.me/62…` dengan teks terisi. Tidak ada API WhatsApp                                                                                     |
+| Email pengingat             | Keluar             | Fase 4. Mailer `log` dulu sampai user menyetujui pengiriman nyata                                                                                        |
 
 **Larangan**: CRM tidak pernah menulis ke database WSCRM.
 
@@ -474,13 +475,13 @@ Nama berkas: `<entitas>-digitalkonsultan-<YYYYMMDD>.csv`.
 
 ## 9. Rencana fase
 
-| Fase | Isi | Hasil yang bisa dilihat |
-|---|---|---|
-| **1 — Inti** | Login + peran, `klien`, impor dari prospek, daftar & detail klien | Klien bisa dicatat & dilihat; prospek bisa jadi klien |
-| **2 — Proyek** | `proyek`, `proyek_tahapan` + template, aktivitas, lampiran, halaman kerja `/proyek/{kode}`, Kanban | "Proyek sudah sampai mana" terjawab |
-| **3 — Uang** | `tagihan`, `tagihan_bayar`, halaman tagihan, ringkasan piutang, ekspor | Tagihan & pembayaran terkendali |
-| **4 — Otomatisasi** | Pengingat jatuh tempo (cron), penarikan layanan/invoice dari WSCRM + cache, pengaturan lengkap | Tidak ada tagihan yang terlewat |
-| **5 — Portal klien** | `/p/{token}`, penulisan aktivitas, pelaporan mingguan | Klien bisa memantau sendiri |
+| Fase                 | Isi                                                                                                | Hasil yang bisa dilihat                               |
+| -------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| **1 — Inti**         | Login + peran, `klien`, impor dari prospek, daftar & detail klien                                  | Klien bisa dicatat & dilihat; prospek bisa jadi klien |
+| **2 — Proyek**       | `proyek`, `proyek_tahapan` + template, aktivitas, lampiran, halaman kerja `/proyek/{kode}`, Kanban | "Proyek sudah sampai mana" terjawab                   |
+| **3 — Uang**         | `tagihan`, `tagihan_bayar`, halaman tagihan, ringkasan piutang, ekspor                             | Tagihan & pembayaran terkendali                       |
+| **4 — Otomatisasi**  | Pengingat jatuh tempo (cron), penarikan layanan/invoice dari WSCRM + cache, pengaturan lengkap     | Tidak ada tagihan yang terlewat                       |
+| **5 — Portal klien** | `/p/{token}`, penulisan aktivitas, pelaporan mingguan                                              | Klien bisa memantau sendiri                           |
 
 Setiap fase berhenti di titik yang bisa dipakai. Tidak ada fase "setengah jadi" di produksi.
 
@@ -529,16 +530,16 @@ Setiap fase berhenti di titik yang bisa dipakai. Tidak ada fase "setengah jadi" 
 
 ## 11. Risiko & jebakan yang sudah diketahui
 
-| Risiko | Mitigasi |
-|---|---|
-| Dua sumber data klien (WSCRM vs CRM) → klien ganda | CRM tidak menulis ke WSCRM; `wscrm_order_id` sebagai penaut; saat impor, cocokkan nama + domain dulu |
-| Nominal uang bergeser karena `float` | `decimal(14,2)`, uji dengan angka besar (Rp999.999.999) |
-| Data masuk hanya dari kepala user, riwayat hilang | Impor awal dari prospek + CSV lama sebelum fase 2 dimulai |
-| RAM habis karena pool PHP baru | Pakai pool `dkapp` yang ada; `pm=ondemand` |
-| Berkas milik `www-data` → `write_file` agen kena *Permission denied* | Tulis ke `/tmp` lalu `sudo cp` + `sudo chown www-data:www-data` |
-| Artisan gagal karena `HOME` | `sudo -u www-data HOME=/var/www php artisan …` |
-| Bayar sebelum ada uang masuk tercatat sebagai lunas | Bukti pembayaran opsional tapi **disarankan**; status lunas tanpa bukti tetap boleh, tercatat siapa yang menandai |
-| Perubahan `users` (kolom `peran`) memengaruhi starter kit | Migrasi terpisah + default `staf`; uji login admin & staf setelah deploy |
+| Risiko                                                               | Mitigasi                                                                                                          |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Dua sumber data klien (WSCRM vs CRM) → klien ganda                   | CRM tidak menulis ke WSCRM; `wscrm_order_id` sebagai penaut; saat impor, cocokkan nama + domain dulu              |
+| Nominal uang bergeser karena `float`                                 | `decimal(14,2)`, uji dengan angka besar (Rp999.999.999)                                                           |
+| Data masuk hanya dari kepala user, riwayat hilang                    | Impor awal dari prospek + CSV lama sebelum fase 2 dimulai                                                         |
+| RAM habis karena pool PHP baru                                       | Pakai pool `dkapp` yang ada; `pm=ondemand`                                                                        |
+| Berkas milik `www-data` → `write_file` agen kena _Permission denied_ | Tulis ke `/tmp` lalu `sudo cp` + `sudo chown www-data:www-data`                                                   |
+| Artisan gagal karena `HOME`                                          | `sudo -u www-data HOME=/var/www php artisan …`                                                                    |
+| Bayar sebelum ada uang masuk tercatat sebagai lunas                  | Bukti pembayaran opsional tapi **disarankan**; status lunas tanpa bukti tetap boleh, tercatat siapa yang menandai |
+| Perubahan `users` (kolom `peran`) memengaruhi starter kit            | Migrasi terpisah + default `staf`; uji login admin & staf setelah deploy                                          |
 
 ---
 

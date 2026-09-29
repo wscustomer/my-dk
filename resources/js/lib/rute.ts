@@ -18,7 +18,8 @@ export const rute = {
     proyekLihat: (id: number) => `/proyek/${id}`,
     proyekUbah: (id: number) => `/proyek/${id}/ubah`,
     proyekStatus: (id: number) => `/proyek/${id}/status`,
-    proyekTahapan: (id: number, tahapan: number) => `/proyek/${id}/tahapan/${tahapan}`,
+    proyekTahapan: (id: number, tahapan: number) =>
+        `/proyek/${id}/tahapan/${tahapan}`,
     proyekAktivitas: (id: number) => `/proyek/${id}/aktivitas`,
     proyekLampiran: (id: number) => `/proyek/${id}/lampiran`,
     proyekPortal: (id: number) => `/proyek/${id}/portal`,
@@ -28,7 +29,8 @@ export const rute = {
     tagihanBaru: '/tagihan/baru',
     tagihanUbah: (id: number) => `/tagihan/${id}/ubah`,
     tagihanBayar: (id: number) => `/tagihan/${id}/bayar`,
-    tagihanBayarHapus: (id: number, bayar: number) => `/tagihan/${id}/bayar/${bayar}`,
+    tagihanBayarHapus: (id: number, bayar: number) =>
+        `/tagihan/${id}/bayar/${bayar}`,
     tagihanBatal: (id: number) => `/tagihan/${id}/batal`,
 
     pengaturan: '/pengaturan',
@@ -44,7 +46,11 @@ export function bulan(tanggal: string | null | undefined): string {
     const d = new Date(tanggal + 'T00:00:00');
     if (Number.isNaN(d.getTime())) return '—';
 
-    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    return d.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+    });
 }
 
 export function rupiah(nilai: number | string | null | undefined): string {

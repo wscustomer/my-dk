@@ -58,11 +58,14 @@ function unggahLampiran() {
 
 function hapusLampiran(l: any) {
     if (!confirm(`Hapus lampiran "${l.nama}"?`)) return;
-    router.delete(rute.lampiranUnduh(l.id).replace('/unduh', ''), { preserveScroll: true });
+    router.delete(rute.lampiranUnduh(l.id).replace('/unduh', ''), {
+        preserveScroll: true,
+    });
 }
 
 function hapusKlien() {
-    if (!confirm(`Hapus klien "${k.value.nama}"? Tindakan ini permanen.`)) return;
+    if (!confirm(`Hapus klien "${k.value.nama}"? Tindakan ini permanen.`))
+        return;
     router.delete(`/klien/${k.value.id}`);
 }
 </script>
@@ -72,7 +75,11 @@ function hapusKlien() {
     <Tata>
         <Kepala
             :judul="klien.nama"
-            :sub="[klien.kode, klien.perusahaan, klien.kota].filter(Boolean).join(' · ')"
+            :sub="
+                [klien.kode, klien.perusahaan, klien.kota]
+                    .filter(Boolean)
+                    .join(' · ')
+            "
             :kembali="rute.klien"
             kembali-teks="Daftar klien"
         >
@@ -89,7 +96,9 @@ function hapusKlien() {
                     class="dk-tbl dk-tbl-kosong"
                     >WhatsApp</a
                 >
-                <Link :href="rute.klienUbah(klien.id)" class="dk-tbl dk-tbl-kosong"
+                <Link
+                    :href="rute.klienUbah(klien.id)"
+                    class="dk-tbl dk-tbl-kosong"
                     >Ubah</Link
                 >
             </template>
@@ -101,7 +110,9 @@ function hapusKlien() {
                 <div class="dk-kartu dk-kartu-p space-y-2.5 text-sm">
                     <div>
                         <p class="dk-label">Nilai kontrak seumur</p>
-                        <p class="text-lg font-semibold tabular-nums text-gray-900">
+                        <p
+                            class="text-lg font-semibold text-gray-900 tabular-nums"
+                        >
                             {{ klien.nilai_lifetime }}
                         </p>
                     </div>
@@ -120,7 +131,10 @@ function hapusKlien() {
                     <div>
                         <p class="dk-label">Sumber</p>
                         <p>
-                            {{ (opsi.sumber[klien.sumber] as string) || klien.sumber }}
+                            {{
+                                (opsi.sumber[klien.sumber] as string) ||
+                                klien.sumber
+                            }}
                             <span v-if="klien.sumber_lain" class="dk-sub"
                                 >({{ klien.sumber_lain }})</span
                             >
@@ -192,17 +206,23 @@ function hapusKlien() {
 
                 <!-- Proyek -->
                 <div v-show="tab === 'proyek'" class="dk-kartu">
-                    <div v-if="klien.proyek.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="klien.proyek.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <Link
                             v-for="p in klien.proyek"
                             :key="p.id"
                             :href="rute.proyekLihat(p.id)"
                             class="block px-4 py-3 hover:bg-gray-50"
                         >
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <span class="text-sm font-medium text-gray-900">{{
-                                    p.nama
-                                }}</span>
+                            <div
+                                class="flex flex-wrap items-center justify-between gap-2"
+                            >
+                                <span
+                                    class="text-sm font-medium text-gray-900"
+                                    >{{ p.nama }}</span
+                                >
                                 <Badge :teks="p.label_status" warna="#6b7280" />
                             </div>
                             <p class="dk-sub mt-0.5">
@@ -214,11 +234,18 @@ function hapusKlien() {
                             </div>
                         </Link>
                     </div>
-                    <Kosong v-else teks="Klien ini belum punya proyek." ikon="▣" />
+                    <Kosong
+                        v-else
+                        teks="Klien ini belum punya proyek."
+                        ikon="▣"
+                    />
                 </div>
 
                 <!-- Tagihan -->
-                <div v-show="tab === 'tagihan'" class="dk-kartu overflow-x-auto">
+                <div
+                    v-show="tab === 'tagihan'"
+                    class="dk-kartu overflow-x-auto"
+                >
                     <table v-if="klien.tagihan.length" class="dk-tabel">
                         <thead>
                             <tr>
@@ -231,13 +258,18 @@ function hapusKlien() {
                         <tbody>
                             <tr v-for="t in klien.tagihan" :key="t.id">
                                 <td>
-                                    <span class="text-gray-900">{{ t.judul }}</span>
+                                    <span class="text-gray-900">{{
+                                        t.judul
+                                    }}</span>
                                     <span class="dk-sub block">{{
                                         t.tgl_teks || '—'
                                     }}</span>
                                 </td>
                                 <td>
-                                    <Badge :teks="t.label_state" :warna="t.warna_state || '#6b7280'" />
+                                    <Badge
+                                        :teks="t.label_state"
+                                        :warna="t.warna_state || '#6b7280'"
+                                    />
                                 </td>
                                 <td class="text-right tabular-nums">
                                     {{ t.total_teks }}
@@ -265,18 +297,26 @@ function hapusKlien() {
                             + Catat
                         </button>
                     </header>
-                    <div v-if="klien.aktivitas.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="klien.aktivitas.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <div
                             v-for="a in klien.aktivitas"
                             :key="a.id"
                             class="flex gap-3 px-4 py-2.5"
                         >
-                            <span class="w-4 shrink-0 text-center text-gray-400">{{
-                                '</span>'
-                            }}</span>
+                            <span class="w-4 shrink-0 text-center text-gray-400"
+                                >•</span
+                            >
                             <div class="min-w-0 flex-1">
-                                <p class="text-sm text-gray-800">{{ a.judul }}</p>
-                                <p v-if="a.catatan" class="dk-sub whitespace-pre-line">
+                                <p class="text-sm text-gray-800">
+                                    {{ a.judul }}
+                                </p>
+                                <p
+                                    v-if="a.catatan"
+                                    class="dk-sub whitespace-pre-line"
+                                >
                                     {{ a.catatan }}
                                 </p>
                                 <p class="dk-sub mt-0.5">
@@ -303,7 +343,10 @@ function hapusKlien() {
                             + Unggah
                         </button>
                     </header>
-                    <div v-if="klien.lampiran.length" class="divide-y divide-gray-50">
+                    <div
+                        v-if="klien.lampiran.length"
+                        class="divide-y divide-gray-50"
+                    >
                         <div
                             v-for="l in klien.lampiran"
                             :key="l.id"
@@ -347,7 +390,9 @@ function hapusKlien() {
         >
             <form class="space-y-3" @submit.prevent="simpanAktivitas">
                 <label class="block">
-                    <span class="dk-label">Judul<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Judul<span class="text-red-500"> *</span></span
+                    >
                     <input v-model="formA.judul" class="dk-isian" autofocus />
                     <span v-if="formA.errors.judul" class="dk-galat">{{
                         formA.errors.judul
@@ -357,28 +402,44 @@ function hapusKlien() {
                     <label class="block">
                         <span class="dk-label">Jenis</span>
                         <select v-model="formA.jenis" class="dk-isian">
-                            <option v-for="(v, kk) in opsi.jenis_aktivitas" :key="kk" :value="kk">
+                            <option
+                                v-for="(v, kk) in opsi.jenis_aktivitas"
+                                :key="kk"
+                                :value="kk"
+                            >
                                 {{ v }}
                             </option>
                         </select>
                     </label>
                     <label class="block">
                         <span class="dk-label">Tanggal</span>
-                        <input v-model="formA.tgl" type="date" class="dk-isian" />
+                        <input
+                            v-model="formA.tgl"
+                            type="date"
+                            class="dk-isian"
+                        />
                     </label>
                 </div>
                 <label v-if="opsi.proyek.length" class="block">
                     <span class="dk-label">Kaitkan ke proyek</span>
                     <select v-model="formA.proyek_id" class="dk-isian">
                         <option value="">— tidak dikaitkan —</option>
-                        <option v-for="p in opsi.proyek" :key="p.id" :value="p.id">
+                        <option
+                            v-for="p in opsi.proyek"
+                            :key="p.id"
+                            :value="p.id"
+                        >
                             {{ p.nama }}
                         </option>
                     </select>
                 </label>
                 <label class="block">
                     <span class="dk-label">Catatan</span>
-                    <textarea v-model="formA.catatan" rows="3" class="dk-isian" />
+                    <textarea
+                        v-model="formA.catatan"
+                        rows="3"
+                        class="dk-isian"
+                    />
                 </label>
                 <div class="flex justify-end gap-2 pt-1">
                     <button
@@ -407,13 +468,16 @@ function hapusKlien() {
         >
             <form class="space-y-3" @submit.prevent="unggahLampiran">
                 <label class="block">
-                    <span class="dk-label">Berkas<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Berkas<span class="text-red-500"> *</span></span
+                    >
                     <input
                         type="file"
                         class="dk-isian"
                         accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.webp,.zip"
                         @change="
-                            (e: any) => (formL.berkas = e.target.files?.[0] || null)
+                            (e: any) =>
+                                (formL.berkas = e.target.files?.[0] || null)
                         "
                     />
                     <span class="mt-1 block text-xs text-gray-400"

@@ -25,7 +25,7 @@ class PengaturanController extends Controller
                 'tipe' => $p->tipe,
             ]),
             'persen_dp' => (float) Pengaturan::nilai('dp_persen_default', 50),
-            'persen_dp_teks' => Pengaturan::nilai('dp_persen_default', 50) . '%',
+            'persen_dp_teks' => Pengaturan::nilai('dp_persen_default', 50).'%',
             'contoh_harga' => Uang::format(12500000),
         ]);
     }

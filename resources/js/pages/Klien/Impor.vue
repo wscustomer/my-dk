@@ -33,7 +33,11 @@ const bisaDipilih = computed(() => tersaring.value.filter((p) => !p.sudah));
 function toggle(p: any) {
     if (p.sudah) return;
     const s = new Set(pilih.value);
-    s.has(p.id) ? s.delete(p.id) : s.add(p.id);
+    if (s.has(p.id)) {
+        s.delete(p.id);
+    } else {
+        s.add(p.id);
+    }
     pilih.value = s;
 }
 
@@ -80,14 +84,20 @@ watch(q, kosongkan);
         </div>
 
         <template v-else>
-            <div class="dk-kartu dk-kartu-p mb-3 flex flex-wrap items-center gap-2">
+            <div
+                class="dk-kartu dk-kartu-p mb-3 flex flex-wrap items-center gap-2"
+            >
                 <input
                     v-model="q"
                     type="search"
                     class="dk-isian max-w-xs flex-1"
                     placeholder="Cari prospek…"
                 />
-                <button type="button" class="dk-tbl dk-tbl-kosong" @click="pilihSemua">
+                <button
+                    type="button"
+                    class="dk-tbl dk-tbl-kosong"
+                    @click="pilihSemua"
+                >
                     Pilih semua ({{ bisaDipilih.length }})
                 </button>
                 <button
@@ -99,7 +109,8 @@ watch(q, kosongkan);
                     Kosongkan
                 </button>
                 <span class="dk-sub ml-auto"
-                    >{{ pilih.size }} dipilih · {{ prospek.length }} prospek</span
+                    >{{ pilih.size }} dipilih ·
+                    {{ prospek.length }} prospek</span
                 >
                 <button
                     type="button"
@@ -128,7 +139,9 @@ watch(q, kosongkan);
                             <tr
                                 v-for="p in tersaring"
                                 :key="p.id"
-                                :class="p.sudah ? 'opacity-50' : 'cursor-pointer'"
+                                :class="
+                                    p.sudah ? 'opacity-50' : 'cursor-pointer'
+                                "
                                 @click="toggle(p)"
                             >
                                 <td>
@@ -142,7 +155,9 @@ watch(q, kosongkan);
                                 <td class="font-medium text-gray-900">
                                     {{ p.nama }}
                                 </td>
-                                <td class="text-gray-600">{{ p.perusahaan || '—' }}</td>
+                                <td class="text-gray-600">
+                                    {{ p.perusahaan || '—' }}
+                                </td>
                                 <td class="text-gray-600">
                                     {{ p.kota || '—' }}
                                     <a
@@ -156,16 +171,22 @@ watch(q, kosongkan);
                                     >
                                 </td>
                                 <td class="text-gray-600">
-                                    <span v-if="p.email" class="block text-xs">{{
-                                        p.email
-                                    }}</span>
-                                    <span v-if="p.telepon" class="block text-xs">{{
-                                        p.telepon
-                                    }}</span>
+                                    <span
+                                        v-if="p.email"
+                                        class="block text-xs"
+                                        >{{ p.email }}</span
+                                    >
+                                    <span
+                                        v-if="p.telepon"
+                                        class="block text-xs"
+                                        >{{ p.telepon }}</span
+                                    >
                                     <span v-if="!p.email && !p.telepon">—</span>
                                 </td>
                                 <td>
-                                    <span v-if="p.sudah" class="dk-badge bg-gray-100 text-gray-500"
+                                    <span
+                                        v-if="p.sudah"
+                                        class="dk-badge bg-gray-100 text-gray-500"
                                         >sudah ada</span
                                     >
                                     <span v-else class="dk-sub">{{
@@ -176,7 +197,11 @@ watch(q, kosongkan);
                         </tbody>
                     </table>
                 </div>
-                <Kosong v-if="!tersaring.length" teks="Tidak ada prospek cocok." ikon="○" />
+                <Kosong
+                    v-if="!tersaring.length"
+                    teks="Tidak ada prospek cocok."
+                    ikon="○"
+                />
             </div>
         </template>
     </Tata>

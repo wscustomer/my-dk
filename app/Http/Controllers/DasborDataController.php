@@ -97,8 +97,8 @@ class DasborDataController extends Controller
                 'user' => $a->user?->name,
                 'tgl_teks' => $a->tgl?->translatedFormat('d M Y'),
                 'tautan' => $a->proyek_id
-                    ? '/proyek/' . $a->proyek_id
-                    : ($a->klien_id ? '/klien/' . $a->klien_id . '/detail' : null),
+                    ? '/proyek/'.$a->proyek_id
+                    : ($a->klien_id ? '/klien/'.$a->klien_id.'/detail' : null),
             ]);
 
         return response()->json([

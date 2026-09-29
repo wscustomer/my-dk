@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
+use App\Support\Uang;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class Klien extends Model
 {
@@ -52,7 +50,7 @@ class Klien extends Model
     {
         $urut = (int) static::query()->max('id') + 1;
 
-        return 'K' . str_pad((string) $urut, 4, '0', STR_PAD_LEFT);
+        return 'K'.str_pad((string) $urut, 4, '0', STR_PAD_LEFT);
     }
 
     public function proyek(): HasMany
@@ -101,7 +99,7 @@ class Klien extends Model
         $nomor = preg_replace('/^620/', '62', $nomor) ?? $nomor;
         $nomor = preg_replace('/^8/', '628', $nomor) ?? $nomor;
 
-        return 'https://wa.me/' . $nomor;
+        return 'https://wa.me/'.$nomor;
     }
 
     /** Nilai kontrak semua proyek yang tidak batal. */
@@ -112,7 +110,7 @@ class Klien extends Model
 
     public function getNilaiLifetimeTeksAttribute(): string
     {
-        return \App\Support\Uang::rp($this->nilai_lifetime);
+        return Uang::rp($this->nilai_lifetime);
     }
 
     public function scopeCari(Builder $q, ?string $kata): Builder

@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Pengaturan;
 use App\Models\Proyek;
 use App\Models\Tagihan;
-use App\Support\Uang;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -54,7 +53,7 @@ class IngatkanJatuhTempo extends Command
             $baris[] = "PROYEK — {$p->nama} | {$p->klien?->nama} | target {$p->tgl_target?->format('d/m/Y')} | {$p->persen}% ({$p->tahap_sekarang})";
         }
 
-        $teks = "Ringkasan pengingat CRM Digital Konsultan\n" . now()->format('d/m/Y H:i') . "\n\n" . implode("\n", $baris);
+        $teks = "Ringkasan pengingat CRM Digital Konsultan\n".now()->format('d/m/Y H:i')."\n\n".implode("\n", $baris);
         $this->line($teks);
 
         if ($kering) {
@@ -70,10 +69,10 @@ class IngatkanJatuhTempo extends Command
         }
 
         try {
-            Mail::raw($teks, fn ($m) => $m->to($tujuan)->subject('[CRM DK] ' . count($baris) . ' pengingat'));
+            Mail::raw($teks, fn ($m) => $m->to($tujuan)->subject('[CRM DK] '.count($baris).' pengingat'));
             $this->info("Email terkirim ke {$tujuan}.");
         } catch (\Throwable $e) {
-            $this->error('Gagal kirim email: ' . $e->getMessage());
+            $this->error('Gagal kirim email: '.$e->getMessage());
 
             return self::FAILURE;
         }

@@ -94,7 +94,7 @@ class Pengaturan extends Model
     public function getNilaiFormatAttribute(): string
     {
         return match ($this->kunci) {
-            'dp_persen_default' => $this->nilai . '%',
+            'dp_persen_default' => $this->nilai.'%',
             default => (string) $this->nilai,
         };
     }

@@ -6,13 +6,14 @@ use App\Models\Aktivitas;
 use App\Models\Klien;
 use App\Models\Lampiran;
 use App\Models\Proyek;
+use App\Models\ProyekTahapan;
 use App\Models\TemplateTahapan;
 use App\Models\User;
 use App\Support\Uang;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -71,7 +72,7 @@ class ProyekController extends Controller
         ];
 
         return Inertia::render('Proyek/Index', [
-            'daftar' => $papan ? $isi2($query->get(), $isi) : $daftar->through($isi),
+            'daftar' => $papan ? $daftar->map($isi)->values() : $daftar->through($isi),
             'papan' => $papan,
             'kolom' => collect(Proyek::PAPAN)->map(fn ($label, $kunci) => ['kunci' => $kunci, 'label' => $label])->values(),
             'filter' => ['q' => $q, 'status' => $status, 'jenis' => $jenis, 'klien' => $klienId, 'papan' => $papan, 'urutan' => $urutan],
@@ -280,7 +281,7 @@ class ProyekController extends Controller
             $ubah['urutan_papan'] = $data['urutan_papan'];
         }
         if (! empty($data['alasan_batal'])) {
-            $ubah['catatan'] = trim(($proyek->catatan ? $proyek->catatan . "\n" : '') . 'Batal: ' . $data['alasan_batal']);
+            $ubah['catatan'] = trim(($proyek->catatan ? $proyek->catatan."\n" : '').'Batal: '.$data['alasan_batal']);
         }
         if ($data['status'] === 'selesai' && $proyek->tgl_serah === null) {
             $ubah['tgl_serah'] = now()->toDateString();
@@ -290,7 +291,7 @@ class ProyekController extends Controller
 
         if ($lama !== $data['status']) {
             $proyek->aktivitas()->create([
-                'judul' => 'Status: ' . (Proyek::STATUS[$lama] ?? $lama) . ' → ' . Proyek::STATUS[$data['status']],
+                'judul' => 'Status: '.(Proyek::STATUS[$lama] ?? $lama).' → '.Proyek::STATUS[$data['status']],
                 'jenis' => 'perubahan_status',
                 'tgl' => now()->toDateString(),
                 'user_id' => $request->user()->id,
@@ -300,7 +301,7 @@ class ProyekController extends Controller
         return back()->with('ok', 'Status proyek diperbarui.');
     }
 
-    public function ubahTahapan(Request $request, Proyek $proyek, \App\Models\ProyekTahapan $tahapan): RedirectResponse
+    public function ubahTahapan(Request $request, Proyek $proyek, ProyekTahapan $tahapan): RedirectResponse
     {
         abort_unless($tahapan->proyek_id === $proyek->id, 404);
 
@@ -362,7 +363,7 @@ class ProyekController extends Controller
 
     public function terbitPortal(Proyek $proyek): RedirectResponse
     {
-        $proyek->update(['portal_token' => $proyek->portal_token ?: \Illuminate\Support\Str::random(40)]);
+        $proyek->update(['portal_token' => $proyek->portal_token ?: Str::random(40)]);
 
         return back()->with('ok', 'Portal klien aktif.');
     }
@@ -389,7 +390,7 @@ class ProyekController extends Controller
                 ]);
             }
             fclose($out);
-        }, 'proyek-' . now()->format('Ymd') . '.csv', ['Content-Type' => 'text/csv']);
+        }, 'proyek-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv']);
     }
 
     private function validasi(Request $request): array

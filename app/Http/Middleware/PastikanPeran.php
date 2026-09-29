@@ -21,7 +21,7 @@ class PastikanPeran
         }
 
         if ($peran !== [] && ! in_array($user->peran, $peran, true)) {
-            abort(403, 'Halaman ini hanya untuk ' . implode('/', $peran) . '.');
+            abort(403, 'Halaman ini hanya untuk '.implode('/', $peran).'.');
         }
 
         return $next($request);

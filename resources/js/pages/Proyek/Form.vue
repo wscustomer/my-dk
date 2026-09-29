@@ -65,7 +65,9 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
         <form class="max-w-3xl space-y-4" @submit.prevent="kirim">
             <div class="dk-kartu dk-kartu-p grid gap-3 sm:grid-cols-2">
                 <label class="block sm:col-span-2">
-                    <span class="dk-label">Nama proyek<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nama proyek<span class="text-red-500"> *</span></span
+                    >
                     <input
                         v-model="form.nama"
                         class="dk-isian"
@@ -78,10 +80,16 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
                 </label>
 
                 <label class="block">
-                    <span class="dk-label">Klien<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Klien<span class="text-red-500"> *</span></span
+                    >
                     <select v-model="form.klien_id" class="dk-isian">
                         <option value="">— pilih klien —</option>
-                        <option v-for="k in opsi.klien" :key="k.id" :value="k.id">
+                        <option
+                            v-for="k in opsi.klien"
+                            :key="k.id"
+                            :value="k.id"
+                        >
                             {{ k.nama }}
                         </option>
                     </select>
@@ -91,16 +99,24 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
                 </label>
 
                 <label class="block">
-                    <span class="dk-label">Jenis<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Jenis<span class="text-red-500"> *</span></span
+                    >
                     <select v-model="form.jenis" class="dk-isian">
-                        <option v-for="(v, k) in opsi.jenis" :key="k" :value="k">
+                        <option
+                            v-for="(v, k) in opsi.jenis"
+                            :key="k"
+                            :value="k"
+                        >
                             {{ v }}
                         </option>
                     </select>
                 </label>
 
                 <label class="block">
-                    <span class="dk-label">Nilai kontrak<span class="text-red-500"> *</span></span>
+                    <span class="dk-label"
+                        >Nilai kontrak<span class="text-red-500"> *</span></span
+                    >
                     <input
                         v-model="form.nilai_kontrak"
                         type="number"
@@ -135,7 +151,11 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
                 <label class="block">
                     <span class="dk-label">Status</span>
                     <select v-model="form.status" class="dk-isian">
-                        <option v-for="(v, k) in opsi.status" :key="k" :value="k">
+                        <option
+                            v-for="(v, k) in opsi.status"
+                            :key="k"
+                            :value="k"
+                        >
                             {{ v }}
                         </option>
                     </select>
@@ -145,7 +165,11 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
                     <span class="dk-label">Penanggung jawab</span>
                     <select v-model="form.pemilik_id" class="dk-isian">
                         <option value="">— belum ditentukan —</option>
-                        <option v-for="s in opsi.staf" :key="s.id" :value="s.id">
+                        <option
+                            v-for="s in opsi.staf"
+                            :key="s.id"
+                            :value="s.id"
+                        >
                             {{ s.name }}
                         </option>
                     </select>
@@ -153,22 +177,38 @@ const template = computed(() => props.opsi.template?.[form.jenis] || []);
 
                 <label class="block">
                     <span class="dk-label">Tanggal mulai</span>
-                    <input v-model="form.tgl_mulai" type="date" class="dk-isian" />
+                    <input
+                        v-model="form.tgl_mulai"
+                        type="date"
+                        class="dk-isian"
+                    />
                 </label>
 
                 <label class="block">
                     <span class="dk-label">Target selesai</span>
-                    <input v-model="form.tgl_target" type="date" class="dk-isian" />
+                    <input
+                        v-model="form.tgl_target"
+                        type="date"
+                        class="dk-isian"
+                    />
                 </label>
 
                 <label class="block sm:col-span-2">
                     <span class="dk-label">Deskripsi singkat</span>
-                    <textarea v-model="form.deskripsi" rows="2" class="dk-isian" />
+                    <textarea
+                        v-model="form.deskripsi"
+                        rows="2"
+                        class="dk-isian"
+                    />
                 </label>
 
                 <label class="block sm:col-span-2">
                     <span class="dk-label">Catatan internal</span>
-                    <textarea v-model="form.catatan" rows="2" class="dk-isian" />
+                    <textarea
+                        v-model="form.catatan"
+                        rows="2"
+                        class="dk-isian"
+                    />
                 </label>
             </div>
 

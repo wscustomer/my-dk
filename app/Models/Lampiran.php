@@ -21,9 +21,9 @@ class Lampiran extends Model
         $b = (int) $this->ukuran;
 
         return match (true) {
-            $b >= 1048576 => round($b / 1048576, 1) . ' MB',
-            $b >= 1024 => round($b / 1024) . ' KB',
-            default => $b . ' B',
+            $b >= 1048576 => round($b / 1048576, 1).' MB',
+            $b >= 1024 => round($b / 1024).' KB',
+            default => $b.' B',
         };
     }
 

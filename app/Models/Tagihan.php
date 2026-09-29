@@ -73,8 +73,6 @@ class Tagihan extends Model
         $this->attributes['terbayar_total_hitung'] = $nilai;
     }
 
-
-
     public function getStateAttribute(): string
     {
         if ($this->status === 'batal') {
