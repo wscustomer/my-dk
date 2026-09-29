@@ -1,0 +1,271 @@
+/**
+ * Gaya bersama CRM Digital Konsultan.
+ * Tailwind 4 dipakai untuk tata letak; kelas di bawah untuk potongan berulang.
+ */
+
+:root {
+    --dk-biru: #2563eb;
+    --dk-kel: #6b7280;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family:
+        'Instrument Sans',
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Kepala halaman ---------- */
+.dk-judul {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.dk-sub {
+    font-size: 0.8125rem;
+    color: var(--dk-kel);
+}
+
+/* ---------- Kartu ---------- */
+.dk-kartu {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+}
+
+.dk-kartu-p {
+    padding: 1rem;
+}
+
+/* ---------- Badge ---------- */
+.dk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    white-space: nowrap;
+}
+
+/* ---------- Tombol ---------- */
+.dk-tbl {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.12s,
+        border-color 0.12s,
+        color 0.12s;
+}
+
+.dk-tbl:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dk-tbl-utama {
+    background: var(--dk-biru);
+    color: #fff;
+}
+
+.dk-tbl-utama:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.dk-tbl-kosong {
+    background: #fff;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+.dk-tbl-kosong:hover:not(:disabled) {
+    background: #f9fafb;
+}
+
+.dk-tbl-bahaya {
+    background: #fff;
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.dk-tbl-bahaya:hover:not(:disabled) {
+    background: #fef2f2;
+}
+
+.dk-tbl-halus {
+    background: transparent;
+    color: #6b7280;
+    padding: 0.25rem 0.5rem;
+}
+
+.dk-tbl-halus:hover:not(:disabled) {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+/* ---------- Isian ---------- */
+.dk-isian {
+    width: 100%;
+    padding: 0.4375rem 0.625rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background: #fff;
+    color: #111827;
+}
+
+.dk-isian:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.35);
+    outline-offset: -1px;
+    border-color: var(--dk-biru);
+}
+
+.dk-isian[aria-invalid='true'] {
+    border-color: #ef4444;
+}
+
+.dk-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+}
+
+.dk-galat {
+    font-size: 0.75rem;
+    color: #dc2626;
+    margin-top: 0.25rem;
+}
+
+/* ---------- Tabel ---------- */
+.dk-tabel {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.875rem;
+}
+
+.dk-tabel thead th {
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6b7280;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.dk-tabel tbody td {
+    padding: 0.5625rem 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+}
+
+.dk-tabel tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ---------- Lain-lain ---------- */
+.dk-kosong {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.dk-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.dk-tab[data-aktif='true'] {
+    color: var(--dk-biru);
+    border-bottom-color: var(--dk-biru);
+    font-weight: 500;
+}
+
+.dk-progress {
+    height: 0.375rem;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.dk-progress > span {
+    display: block;
+    height: 100%;
+    background: var(--dk-biru);
+    border-radius: 999px;
+    transition: width 0.3s;
+}
+
+.dk-tutup {
+    animation: dk-masuk 0.15s ease-out;
+}
+
+@keyframes dk-masuk {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dk-tutup {
+        animation: none;
+    }
+}
+
+/* Gulir halus untuk papan kanban */
+.dk-papan {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(15rem, 1fr);
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    align-items: start;
+}
+
+.dk-papan-kolom {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    min-height: 6rem;
+}
+
+.dk-papan-kolom[data-seret='true'] {
+    border-color: var(--dk-biru);
+    background: #eff6ff;
+}
