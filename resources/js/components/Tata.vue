@@ -51,7 +51,7 @@ const inisial = computed(() => {
         <div class="mx-auto flex max-w-[110rem] gap-0">
             <!-- Sidebar -->
             <aside
-                class="sticky top-0 hidden h-screen w-56 shrink-0 flex-col border-r border-gray-200 bg-white px-3 py-4 md:flex"
+                class="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-gray-200 bg-white px-3 py-4 md:flex"
             >
                 <Link href="/" class="mb-5 flex items-center gap-2 px-2">
                     <span
@@ -95,6 +95,7 @@ const inisial = computed(() => {
                         <div class="min-w-0 flex-1">
                             <p
                                 class="truncate text-xs font-medium text-gray-800"
+                                :title="pengguna?.name"
                             >
                                 {{ pengguna?.name }}
                             </p>
@@ -180,7 +181,7 @@ const inisial = computed(() => {
                     </div>
                 </div>
 
-                <main class="px-4 py-4 sm:px-6 sm:py-5">
+                <main class="min-w-0 flex-1 px-4 py-4 sm:px-6 sm:py-5">
                     <slot />
                 </main>
             </div>

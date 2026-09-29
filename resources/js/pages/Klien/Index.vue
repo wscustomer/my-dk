@@ -139,8 +139,8 @@ const ada = computed(() => props.daftar.data.length > 0);
                             <th>Klien</th>
                             <th>Kontak</th>
                             <th>Status</th>
-                            <th class="text-right">Proyek</th>
-                            <th class="text-right">Nilai kontrak</th>
+                            <th class="dk-angka">Proyek</th>
+                            <th class="dk-angka">Nilai kontrak</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -155,12 +155,12 @@ const ada = computed(() => props.daftar.data.length > 0);
                                     <span class="font-medium text-gray-900">{{
                                         k.nama
                                     }}</span>
-                                    <span class="dk-sub block">
-                                        {{ k.kode
-                                        }}<span v-if="k.perusahaan">
-                                            · {{ k.perusahaan }}</span
-                                        >
-                                    </span>
+                                    <span
+                                        v-if="k.perusahaan"
+                                        class="dk-sub block truncate"
+                                        :title="k.perusahaan"
+                                        >{{ k.perusahaan }}</span
+                                    >
                                 </button>
                             </td>
                             <td class="text-gray-600">
@@ -193,18 +193,20 @@ const ada = computed(() => props.daftar.data.length > 0);
                                     >nonaktif</span
                                 >
                             </td>
-                            <td class="text-right text-gray-600">
+                            <td class="dk-angka text-gray-600">
                                 {{ k.proyek_aktif }}
                             </td>
-                            <td class="text-right font-medium tabular-nums">
+                            <td class="dk-angka font-medium">
                                 {{ k.nilai_lifetime }}
                             </td>
-                            <td class="text-right whitespace-nowrap">
-                                <Link
-                                    :href="rute.klienDetail(k.id)"
-                                    class="dk-tbl dk-tbl-halus"
-                                    >Buka</Link
-                                >
+                            <td class="dk-aksi">
+                                <div class="dk-aksi-grup">
+                                    <Link
+                                        :href="rute.klienDetail(k.id)"
+                                        class="dk-tbl dk-tbl-halus"
+                                        >Buka</Link
+                                    >
+                                </div>
                             </td>
                         </tr>
                     </tbody>

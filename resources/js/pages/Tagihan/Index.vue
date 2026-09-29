@@ -161,8 +161,8 @@ const ada = computed(() => props.daftar.data.length > 0);
                             <th>Klien</th>
                             <th>Status</th>
                             <th>Jatuh tempo</th>
-                            <th class="text-right">Total</th>
-                            <th class="text-right">Sisa</th>
+                            <th class="dk-angka">Total</th>
+                            <th class="dk-angka">Sisa</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -176,9 +176,16 @@ const ada = computed(() => props.daftar.data.length > 0);
                                 >
                                     {{ t.judul }}
                                 </button>
-                                <span v-if="t.proyek" class="dk-sub block">{{
-                                    t.proyek
-                                }}</span>
+                                <span
+                                    v-if="
+                                        t.proyek &&
+                                        !t.judul.includes(t.proyek) &&
+                                        t.proyek !== t.klien
+                                    "
+                                    class="dk-sub block truncate"
+                                    :title="t.proyek"
+                                    >{{ t.proyek }}</span
+                                >
                             </td>
                             <td>
                                 <Link
@@ -198,7 +205,7 @@ const ada = computed(() => props.daftar.data.length > 0);
                                     >{{ t.hari_lewat }}h</span
                                 >
                             </td>
-                            <td>
+                            <td class="dk-tanggal">
                                 <span
                                     :class="
                                         t.state === 'lewat'
@@ -208,11 +215,11 @@ const ada = computed(() => props.daftar.data.length > 0);
                                     >{{ t.tgl_teks || '—' }}</span
                                 >
                             </td>
-                            <td class="text-right tabular-nums">
+                            <td class="dk-angka">
                                 {{ t.total_teks }}
                             </td>
                             <td
-                                class="text-right font-medium tabular-nums"
+                                class="dk-angka font-medium"
                                 :class="
                                     t.sisa > 0
                                         ? 'text-red-700'
@@ -221,30 +228,33 @@ const ada = computed(() => props.daftar.data.length > 0);
                             >
                                 {{ t.sisa_teks }}
                             </td>
-                            <td class="text-right whitespace-nowrap">
-                                <button
-                                    v-if="!t.lunas && t.sisa > 0"
-                                    type="button"
-                                    class="dk-tbl dk-tbl-kosong"
-                                    @click="bukaBayar(t)"
-                                >
-                                    Bayar
-                                </button>
-                                <Link
-                                    :href="rute.tagihanUbah(t.id)"
-                                    class="dk-tbl dk-tbl-halus"
-                                    >Ubah</Link
-                                >
-                                <button
-                                    v-if="
-                                        t.status !== 'batal' && t.terbayar === 0
-                                    "
-                                    type="button"
-                                    class="dk-tbl dk-tbl-halus text-red-600"
-                                    @click="batalkan(t)"
-                                >
-                                    Batal
-                                </button>
+                            <td class="dk-aksi">
+                                <div class="dk-aksi-grup">
+                                    <button
+                                        v-if="!t.lunas && t.sisa > 0"
+                                        type="button"
+                                        class="dk-tbl dk-tbl-kosong"
+                                        @click="bukaBayar(t)"
+                                    >
+                                        Bayar
+                                    </button>
+                                    <Link
+                                        :href="rute.tagihanUbah(t.id)"
+                                        class="dk-tbl dk-tbl-halus"
+                                        >Ubah</Link
+                                    >
+                                    <button
+                                        v-if="
+                                            t.status !== 'batal' &&
+                                            t.terbayar === 0
+                                        "
+                                        type="button"
+                                        class="dk-tbl dk-tbl-halus text-red-600"
+                                        @click="batalkan(t)"
+                                    >
+                                        Batal
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

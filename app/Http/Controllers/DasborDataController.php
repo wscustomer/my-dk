@@ -123,6 +123,12 @@ class DasborDataController extends Controller
                 'tagihan' => $jatuhTempo,
             ],
             'linimasa' => $linimasa,
+            // Jumlah proyek per status — widget "Proyek per status" butuh angka,
+            // bukan cuma label yang tampak seperti tombol mati.
+            'status_jumlah' => Proyek::query()
+                ->selectRaw('status, count(*) as jumlah')
+                ->groupBy('status')
+                ->pluck('jumlah', 'status'),
         ]);
     }
 

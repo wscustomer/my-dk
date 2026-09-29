@@ -15,7 +15,8 @@ defineProps<{
             <span v-if="ikon" class="opacity-40">{{ ikon }}</span>
         </div>
         <p
-            class="mt-1 text-xl font-semibold tabular-nums"
+            class="mt-1 truncate text-xl font-semibold tabular-nums"
+            :title="String(nilai)"
             :style="{ color: warna || '#111827' }"
         >
             {{ nilai }}

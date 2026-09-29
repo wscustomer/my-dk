@@ -9,6 +9,7 @@ import { rute } from '@/lib/rute';
 const props = defineProps<{
     kartu: any;
     status: any;
+    statusJumlah: Record<string, number>;
     perlu: any;
     linimasa: any[];
     waktu: string;
@@ -242,9 +243,13 @@ onBeforeUnmount(() => {
                             v-for="(label, kunci) in status"
                             :key="kunci"
                             :href="`/proyek?status=${kunci}`"
-                            class="rounded-full border border-gray-200 px-2.5 py-1 text-xs text-gray-700 hover:border-blue-400 hover:text-blue-700"
+                            class="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-2.5 py-1 text-xs text-gray-700 hover:border-blue-400 hover:text-blue-700"
                         >
                             {{ label }}
+                            <span
+                                class="rounded-full bg-gray-100 px-1.5 text-[11px] font-semibold text-gray-600 tabular-nums"
+                                >{{ statusJumlah[kunci] ?? 0 }}</span
+                            >
                         </Link>
                     </div>
                 </div>

@@ -13,8 +13,10 @@
     --dk-hairline: #e0e0e8; /* SpaceX hairline-on-light */
     --dk-hairline-lembut: #eef0f4;
     --dk-radius: 4px; /* SpaceX rounded.xs — satu radius untuk semua chrome */
-    --dk-caps-tracking: 1.17px; /* SpaceX button-cap */
-    --dk-eyebrow-tracking: 0.96px; /* SpaceX micro-cap */
+    /* Tracking positif hanya untuk teks caps berukuran kecil; angka & nama klien
+     * tidak — tracking lebar bikin email/nominal susah dibaca. */
+    --dk-caps-tracking: 0.5px;
+    --dk-eyebrow-tracking: 0.4px;
 }
 
 html,
@@ -183,12 +185,45 @@ body {
     font-size: 0.875rem;
 }
 
+/* Angka & nominal jangan patah baris — "Rp" terpisah dari nominalnya. */
+.dk-tabel .dk-angka {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.dk-tabel thead th.dk-angka {
+    text-align: right;
+}
+
+/* Kolom aksi tak berlabel — lebarnya dipatok biar tombol sejajar antar-baris. */
+.dk-tabel .dk-aksi {
+    text-align: right;
+    white-space: nowrap;
+    width: 1%;
+}
+
+/* Grup tombol aksi rata kanan — tombol pertama sejajar antar-baris. */
+.dk-tabel .dk-aksi > * {
+    vertical-align: middle;
+}
+.dk-aksi-grup {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+}
+
 .dk-tabel thead th {
     text-align: left;
     font-size: 0.6875rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: var(--dk-eyebrow-tracking);
+    /* Tanpa tracking: caps + bold sudah cukup. Tracking lebar memecah kata
+     * ("ST AT US") di kolom sempit. */
+    letter-spacing: normal;
+    white-space: nowrap;
     color: var(--dk-kel);
     padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--dk-hairline);
@@ -272,21 +307,32 @@ body {
 .dk-papan {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(15rem, 1fr);
+    grid-auto-columns: minmax(16.5rem, 1fr);
     gap: 0.75rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
     align-items: start;
 }
-
 .dk-papan-kolom {
     background: #fafafa;
     border: 1px solid var(--dk-hairline);
     border-radius: var(--dk-radius);
     min-height: 6rem;
+    /* Scroll internal per kolom — 50 kartu tak boleh memanjangkan halaman. */
+    max-height: calc(100vh - 14rem);
+    display: flex;
+    flex-direction: column;
 }
-
+.dk-papan-isi {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
 .dk-papan-kolom[data-seret='true'] {
     border-color: var(--dk-biru);
     background: #eff6ff;
+}
+
+/* Tanggal tak boleh patah "16 Mei" / "2026" jadi dua baris. */
+.dk-tanggal {
+    white-space: nowrap;
 }

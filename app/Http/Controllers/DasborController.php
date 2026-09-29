@@ -23,6 +23,7 @@ class DasborController extends Controller
             'linimasa' => $muatan['linimasa'],
             'waktu' => $muatan['waktu'],
             'status' => Proyek::STATUS,
+            'statusJumlah' => $muatan['status_jumlah'],
         ]);
     }
 }

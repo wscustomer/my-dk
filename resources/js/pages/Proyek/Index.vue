@@ -187,7 +187,7 @@ const ada = computed(() =>
                         papanData[k.kunci]?.length || 0
                     }}</span>
                 </header>
-                <div class="space-y-2 p-2">
+                <div class="dk-papan-isi space-y-2 p-2">
                     <div
                         v-for="p in papanData[k.kunci]"
                         :key="p.id"
@@ -240,7 +240,7 @@ const ada = computed(() =>
                                 <th>Status</th>
                                 <th>Progres</th>
                                 <th>Target</th>
-                                <th class="text-right">Nilai</th>
+                                <th class="dk-angka">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -296,7 +296,7 @@ const ada = computed(() =>
                                         >{{ p.tgl_target_teks || '—' }}</span
                                     >
                                 </td>
-                                <td class="text-right tabular-nums">
+                                <td class="dk-angka">
                                     {{ p.nilai_teks }}
                                 </td>
                             </tr>
