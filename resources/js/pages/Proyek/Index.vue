@@ -104,7 +104,12 @@ function lepas(kunci: string) {
     );
 }
 
-const ada = computed(() => (props.daftar as any[]).length > 0);
+/** Mode papan `daftar` = array datar; mode daftar = objek paginator. */
+const ada = computed(() =>
+    props.papan
+        ? (props.daftar as any[]).length > 0
+        : (props.daftar as any)?.total > 0,
+);
 </script>
 
 <template>
